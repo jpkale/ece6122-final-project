@@ -14,6 +14,8 @@ using namespace std;
 Page::Page() {
     initscr();
     cbreak();
+	noecho();
+
     if (has_colors()) {
         start_color();
     }
@@ -31,12 +33,15 @@ Page::Page() {
 
     this->help_window = derwin(this->enclosing_window,
             HELP_W_HEIGHT, HELP_W_WIDTH,
-            (this->height - HELP_W_HEIGHT), (this->width - HELP_W_WIDTH) / 2);
+            (this->height - HELP_W_HEIGHT),
+            (this->width - HELP_W_WIDTH) / 2);
+    keypad(this->help_window, true);
     box(this->help_window, 0, 0);
 
     set_menu_win(this->help_menu, this->help_window);
-    set_menu_sub(this->help_menu,
-            derwin(this->help_window, HELP_W_HEIGHT - 1, HELP_W_WIDTH - 1, 1, 1));
+    set_menu_sub(this->help_menu, derwin(this->help_window,
+                HELP_W_HEIGHT - 1,
+                HELP_W_WIDTH - 1, 1, 1));
     set_menu_format(this->help_menu, 1, 2);
     set_menu_mark(this->help_menu, "");
 

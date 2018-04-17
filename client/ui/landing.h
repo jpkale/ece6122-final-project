@@ -28,10 +28,9 @@ namespace ui {
 
     class LandingPage : public Page {
         private:
-            FIELD* username_field;
-            FIELD* password_field;
+            FORM* credentials_form;
             MENU* create_login_menu;
-            WINDOW* menu_window;
+            WINDOW* create_login_window;
         public:
             LandingPage();
             ~LandingPage();
