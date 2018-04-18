@@ -5,4 +5,4 @@ project (BankingAppClient)
 project (BankingAppServer)
 
 add_executable (BankingAppClient client/client.cpp)
-add_executable (BankingAppServer server/server.cpp)
+add_executable (BankingAppServer server/server.cpp server/encryption.cpp)
