@@ -8,12 +8,12 @@ using namespace std;
 ofstream person;   //writing to
 ifstream data;     //reading from
 
-/*
+/**************************************************************************************
  * Creates the initial log file
  * Variables to take in: user - to name the file
  *                      accNum - write the account number to associate with the user
  * Hard coded: and initial account balance of 0
- */
+ **************************************************************************************/
 void createFile(string user, int accNum){
     string name;
     int balance = 0;
@@ -25,11 +25,11 @@ void createFile(string user, int accNum){
     person.close();
 };
 
-/*
+/**************************************************************************
  * Adds the data to the already created log file (updating the balance)
  * Variables to take in: user - to grab the file by user name
  *                       value - the new balance in the account
- */
+ **************************************************************************/
 void log(string user, int value){
     string name;
     name.append(user);
@@ -41,12 +41,13 @@ void log(string user, int value){
     else {
         cout << "Unable to open file";
     }
+    person.close();
 }
 
-/*
+/*******************************************************************
  * Sends the last line balance to the user
  * Variables to take in: user - to grab the file by user name
- */
+ *******************************************************************/
 int getBalance(string user)
 {
     string line, part1;
@@ -66,10 +67,10 @@ int getBalance(string user)
     return part2;
 }
 
-/*
+/**************************************************************************
  * Sends the account number to the user 9can be used for verification)
  * Variables to take in: user - to grab the file by user name
- */
+ **************************************************************************/
 int getAcctNum(string user)
 {
     string name, part1, part2;
