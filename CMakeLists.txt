@@ -4,5 +4,5 @@ cmake_minimum_required (VERSION 2.6)
 project (BankingAppClient)
 project (BankingAppServer)
 
-add_executable (BankingAppClient client/client.cpp)
-add_executable (BankingAppServer server/server.cpp)
+add_executable (BankingAppClient client/client.cpp account.h accountHolder.h)
+add_executable (BankingAppServer server/server.cpp account.h)
