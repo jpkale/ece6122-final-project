@@ -112,3 +112,29 @@ void Page::handle_help_exit() {
         std::exit(0);
     }
 }
+
+void Page::handle_help_exit() {
+    ITEM** items = menu_items(this->help_menu);
+    int c = item_count(this->help_menu);
+
+    if (current_item(this->help_menu) == items[0]) {
+        WINDOW* window = newwin(6, 48, (this->height - 6) / 2, (this->width - 48) / 2);
+        box(window, 0, 0);
+        keypad(window, true);
+        mvwprintw(window, 1, 1, "Help:");
+        mvwprintw(window, 2, 1, " - Use arrows to navigate.");
+        mvwprintw(window, 3, 1, " - Press enter to select a button");
+        mvwprintw(window, 4, 1, " - Press any key to return to previous window");
+        wrefresh(window);
+        wgetch(window);
+        wclear(window);
+        wrefresh(window);
+        delwin(window);
+        touchwin(this->enclosing_window);
+        wrefresh(this->enclosing_window);
+    } else {
+        // Insert logout call?
+        endwin();
+        std::exit(0);
+    }
+}
