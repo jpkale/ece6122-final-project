@@ -18,6 +18,6 @@ add_executable (BankingAppServer ${SERVER_MAIN} ${SERVER_HEADERS} ${SERVER_SOURC
 
 # Curses
 find_package (Curses REQUIRED)
-set (ADDITIONAL_LIBRARIES menu)
+set (ADDITIONAL_LIBRARIES menu form)
 include_directories (${CURSES_INCLUDE_DIR})
 target_link_libraries (BankingAppClient ${CURSES_LIBRARIES} ${ADDITIONAL_LIBRARIES})
