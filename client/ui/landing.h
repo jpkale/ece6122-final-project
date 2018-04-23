@@ -11,20 +11,26 @@ using namespace std;
 
 namespace ui {
 
-    typedef struct LandingCredential {
-        string username;
-        string password; 
-    } LandingCredentials;
+    class LandingCredential {
+        public:
+            char* username;
+            char* password;
+            LandingCredential();
+            ~LandingCredential();
+    };
 
     enum LandingSubmitType {
 		LOGIN,
 		CREATE,       
     };
 
-	typedef struct LandingResult {
-		LandingCredentials creds;
-		LandingSubmitType type;
-	} LandingResult;
+    class LandingResult {
+        public:
+            LandingCredential* cred;
+            LandingSubmitType type;
+            LandingResult(LandingCredential* cred, LandingSubmitType type);
+            ~LandingResult();
+    };
 
     class LandingPage : public Page {
         private:
@@ -34,6 +40,6 @@ namespace ui {
         public:
             LandingPage();
             ~LandingPage();
-			LandingResult waitForResult();
+			LandingResult* wait_for_result();
     };
 }
