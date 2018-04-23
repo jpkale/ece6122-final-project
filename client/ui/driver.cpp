@@ -5,8 +5,7 @@
 #include <thread>
 
 using namespace ui;
-using namespace std;
-
+using namespace std; 
 Driver::Driver(void (*login_cb)(void), void (*signup_cb)(void), void (*sendmoney_cb)(void),
         void (*withdrawlmoney_cb)(void), void (*editinfo_cb)(void), void (*exit_cb)(void)) {
     this->login_cb = login_cb;
@@ -20,15 +19,18 @@ Driver::Driver(void (*login_cb)(void), void (*signup_cb)(void), void (*sendmoney
 Driver::~Driver() {}
 
 void Driver::start() {
-    LandingPage page = LandingPage();
-	LandingResult result = page.waitForResult();
+    LandingPage* page = new LandingPage();
+	LandingResult* result = page->wait_for_result();
 
-	switch (result.type) {
+	switch (result->type) {
 		case LOGIN:
-			// Do something
+			printf("Login: %s:%s", result->cred->username, result->cred->password);
 			break;
 		case CREATE:
-			// Do something
+			printf("create: %s:%s", result->cred->username, result->cred->password);
 			break;
 	}
+    
+    delete result;
+    delete page;
 }
