@@ -8,14 +8,14 @@ namespace ui {
         private:
             bool (*login_cb)(Credential*);
             bool (*signup_cb)(Credential*);
-            bool (*deposit_cb)(Request*);
-            bool (*withdrawl_cb)(Request*);
+            bool (*deposit_cb)(double);
+            bool (*withdrawl_cb)(double);
         public:
             Driver(
                 bool (*login_cb)(Credential*),
                 bool (*signup_cb)(Credential*),
-                bool (*deposit_cb)(Request*),
-                bool (*withdrawl_cb)(Request*)
+                bool (*deposit_cb)(double),
+                bool (*withdrawl_cb)(double)
             );
             ~Driver();
             void start();
