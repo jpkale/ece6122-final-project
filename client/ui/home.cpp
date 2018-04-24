@@ -13,9 +13,9 @@ using namespace ui;
 
 #define TEXT_LENGTH     20
 
-Request::Request(unsigned int account_number, unsigned int amount) {
-    this->account_number = account_number;
+HomeResult::HomeResult(double amount, HomeRequestType type) {
     this->amount = amount;
+    this->type = type;
 }
 
 HomePage::HomePage() {
@@ -64,6 +64,32 @@ HomePage::HomePage() {
 }
 
 HomeResult* HomePage::wait_for_result() {
-    wgetch(this->withdrawl_deposit_window);
+    unsigned int count;
+    char* buf;
+    ITEM** items = menu_items(this->withdrawl_deposit_menu);
+
+    while (true) {
+        int c = wgetch(this->withdrawl_deposit_window);
+        switch (c) {
+            case KEY_ENTER: case '\n':
+                if (current_item(this->withdrawl_deposit_menu) == items[0])
+                    return new HomeResult(atof(buf), WITHDRAWL);
+                else
+                    return new HomeResult(atof(buf), DEPOSIT);
+                break;
+            case KEY_F(1):
+                this->show_help();
+                break;
+            case KEY_F(2):
+                this->handle_exit();
+                break;
+            default:
+                if (count < TEXT_LENGTH && 48 < c < 57 || c == 46) {
+                    form_driver(this->amount_form, c);
+                    buf[count] = c;
+                }
+                break;
+        }
+    }
     return 0;
 }

@@ -10,10 +10,10 @@ bool mock_success_login(Credential* cred) { return true; }
 bool mock_failure_login(Credential* cred) { return false; }
 bool mock_success_signup(Credential* cred) { return true; }
 bool mock_failure_signup(Credential* cred) { return false; }
-bool mock_success_withdrawl(Request* req) { return true; }
-bool mock_failure_widthrawl(Request* req) { return true; }
-bool mock_success_deposit(Request* req) { return true; }
-bool mock_failure_deposit(Request* req) { return true; }
+bool mock_success_withdrawl(double req) { return true; }
+bool mock_failure_widthrawl(double req) { return true; }
+bool mock_success_deposit(double req) { return true; }
+bool mock_failure_deposit(double req) { return true; }
 
 int main(int argc, char* argv[]) {
     Driver *ui_driver = new Driver(
