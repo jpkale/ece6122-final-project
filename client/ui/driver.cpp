@@ -5,32 +5,48 @@
 #include <thread>
 
 using namespace ui;
-using namespace std; 
-Driver::Driver(void (*login_cb)(void), void (*signup_cb)(void), void (*sendmoney_cb)(void),
-        void (*withdrawlmoney_cb)(void), void (*editinfo_cb)(void), void (*exit_cb)(void)) {
+using namespace std;
+
+Driver::Driver(
+    bool (*login_cb)(Credential*),
+    bool (*signup_cb)(Credential*),
+    bool (*deposit_cb)(Request*),
+    bool (*withdrawl_cb)(Request*)
+) {
     this->login_cb = login_cb;
     this->signup_cb = signup_cb;
-    this->sendmoney_cb = sendmoney_cb;
-    this->withdrawlmoney_cb = withdrawlmoney_cb;
-    this->editinfo_cb = editinfo_cb;
-    this->exit_cb = exit_cb;
+    this->deposit_cb = deposit_cb;
+    this->withdrawl_cb = withdrawl_cb;
 }
 
 Driver::~Driver() {}
 
 void Driver::start() {
-    LandingPage* page = new LandingPage();
-	LandingResult* result = page->wait_for_result();
+    LandingPage* lp = new LandingPage();
+	LandingResult* lr = lp->wait_for_result();
+    bool was_successful;
 
-	switch (result->type) {
+	switch (lr->type) {
 		case LOGIN:
-			printf("Login: %s:%s", result->cred->username, result->cred->password);
+            was_successful = this->login_cb(lr->cred);
+            if (was_successful) {
+                lp->popup("Successfully logged in");
+
+                HomePage* hp = new HomePage();
+                HomeResult* hr = hp->wait_for_result();
+
+            }
+            else
+                lp->popup("Failed logging in");
 			break;
 		case CREATE:
-			printf("create: %s:%s", result->cred->username, result->cred->password);
+            was_successful = this->signup_cb(lr->cred);
+            if (was_successful)
+                lp->popup("Successfuly created account");
+            else
+                lp->popup("Failed creating account");
 			break;
 	}
     
-    delete result;
-    delete page;
+    delete lp, lr;
 }
