@@ -1,21 +1,22 @@
 #pragma once
 
+#include "landing.h"
+#include "home.h"
+
 namespace ui {
     class Driver {
         private:
-            void (*login_cb)(void);
-            void (*signup_cb)(void);
-            void (*sendmoney_cb)(void);
-            void (*withdrawlmoney_cb)(void);
-            void (*editinfo_cb)(void);
-            void (*exit_cb)(void);
+            bool (*login_cb)(Credential*);
+            bool (*signup_cb)(Credential*);
+            bool (*deposit_cb)(Request*);
+            bool (*withdrawl_cb)(Request*);
         public:
-            Driver(void (*login_cb)(void),
-                   void (*signup_cb)(void),
-                   void (*sendmoney_cb)(void),
-                   void (*withdrawlmoney_cb)(void),
-                   void (*editinfo_cb)(void),
-                   void (*exit_cb)(void));
+            Driver(
+                bool (*login_cb)(Credential*),
+                bool (*signup_cb)(Credential*),
+                bool (*deposit_cb)(Request*),
+                bool (*withdrawl_cb)(Request*)
+            );
             ~Driver();
             void start();
     };
