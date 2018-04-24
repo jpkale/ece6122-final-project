@@ -4,11 +4,12 @@
 #include <menu.h>
 
 #include <cstdlib>
+#include <string>
 
 using namespace ui;
 using namespace std;
 
-#define HELP_W_WIDTH    11
+#define HELP_W_WIDTH    21
 #define HELP_W_HEIGHT   3 
 
 Page::Page() {
@@ -27,18 +28,12 @@ Page::Page() {
 
     this->enclosing_window = newwin(this->height, this->width, 0, 0);
 
-    ITEM** items = (ITEM**) calloc(3, sizeof(ITEM*));
-    items[0] = new_item("Help", "");
-    items[1] = new_item("Exit", "");
-    items[2] = new_item("", "");
-    this->help_menu = new_menu(items);
-
     this->help_window = derwin(this->enclosing_window,
             HELP_W_HEIGHT, HELP_W_WIDTH,
             (this->height - HELP_W_HEIGHT),
             (this->width - HELP_W_WIDTH) / 2);
-    keypad(this->help_window, true);
     box(this->help_window, 0, 0);
+    mvwprintw(this->help_window, 1, 1, "(H) Help | (E) Exit");
 
     set_menu_win(this->help_menu, this->help_window);
     set_menu_sub(this->help_menu, derwin(this->help_window,
@@ -59,28 +54,40 @@ Page::~Page() {
     endwin();
 }
 
-void Page::handle_help_exit() {
-    ITEM** items = menu_items(this->help_menu);
-    int c = item_count(this->help_menu);
+void Page::handle_exit() {
+    // Insert logout call?
+    endwin();
+    std::exit(0);
+}
 
-    if (current_item(this->help_menu) == items[0]) {
-        WINDOW* window = newwin(6, 48, (this->height - 6) / 2, (this->width - 48) / 2);
-        box(window, 0, 0);
-        keypad(window, true);
-        mvwprintw(window, 1, 1, "Help:");
-        mvwprintw(window, 2, 1, " - Use arrows to navigate.");
-        mvwprintw(window, 3, 1, " - Press enter to select a button");
-        mvwprintw(window, 4, 1, " - Press any key to return to previous window");
-        wrefresh(window);
-        wgetch(window);
-        wclear(window);
-        wrefresh(window);
-        delwin(window);
-        touchwin(this->enclosing_window);
-        wrefresh(this->enclosing_window);
-    } else {
-        // Insert logout call?
-        endwin();
-        std::exit(0);
-    }
+void Page::show_help() {
+    WINDOW* window = newwin(6, 48, (this->height - 6) / 2, (this->width - 48) / 2);
+    box(window, 0, 0);
+    keypad(window, true);
+    mvwprintw(window, 1, 1, "Help:");
+    mvwprintw(window, 2, 1, " - Use arrows to navigate.");
+    mvwprintw(window, 3, 1, " - Press enter to select a button");
+    mvwprintw(window, 4, 1, " - Press any key to return to previous window");
+    wrefresh(window);
+    wgetch(window);
+    wclear(window);
+    wrefresh(window);
+    delwin(window);
+    touchwin(this->enclosing_window);
+    wrefresh(this->enclosing_window);
+}
+
+void Page::popup(string message) {
+    WINDOW* window = newwin(6, 48, (this->height - 6) / 2, (this->width - 48) / 2);
+    box(window, 0, 0);
+    keypad(window, true);
+    mvwprintw(window, 2, 1, message.c_str());
+    mvwprintw(window, 3, 1, "Press any key to continue");
+    wrefresh(window);
+    wgetch(window);
+    wclear(window);
+    wrefresh(window);
+    delwin(window);
+    touchwin(this->enclosing_window);
+    wrefresh(this->enclosing_window);
 }

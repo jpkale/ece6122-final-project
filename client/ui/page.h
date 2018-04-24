@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include <curses.h>
 #include <menu.h>
 
@@ -11,7 +13,9 @@ namespace ui {
         public:
             Page(); 
             ~Page(); 
-            void handle_help_exit();
+            void show_help();
+            void handle_exit();
+            void popup(std::string message);
         protected:
             MENU* help_menu;
             WINDOW *help_window;
