@@ -121,10 +121,10 @@ LandingResult* LandingPage::wait_for_result() {
                     (*count)--;
                 }
                 break;
-            case 'h': case 'H':
+            case KEY_F(1):
                 this->show_help();
                 break;
-            case 'e': case 'E':
+            case KEY_F(2):
                 this->handle_exit();
                 break;
             case KEY_ENTER: case '\n':
