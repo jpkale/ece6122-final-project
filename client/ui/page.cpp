@@ -9,7 +9,7 @@
 using namespace ui;
 using namespace std;
 
-#define HELP_W_WIDTH    21
+#define HELP_W_WIDTH    23
 #define HELP_W_HEIGHT   3 
 
 Page::Page() {
@@ -33,7 +33,7 @@ Page::Page() {
             (this->height - HELP_W_HEIGHT),
             (this->width - HELP_W_WIDTH) / 2);
     box(this->help_window, 0, 0);
-    mvwprintw(this->help_window, 1, 1, "(H) Help | (E) Exit");
+    mvwprintw(this->help_window, 1, 1, "(F1) Help | (F2) Exit");
 
     set_menu_win(this->help_menu, this->help_window);
     set_menu_sub(this->help_menu, derwin(this->help_window,
