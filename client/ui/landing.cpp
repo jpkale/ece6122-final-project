@@ -84,12 +84,12 @@ LandingResult* LandingPage::wait_for_result() {
     unsigned int uname_char_count = 0;
     unsigned int pword_char_count = 0;
     Credential *cred = new Credential();
+    ITEM** items = menu_items(this->create_login_menu);
+    unsigned int* count;
+    char* buf;
 
     while (true) {
-        ITEM** items = menu_items(this->create_login_menu);
         int c = wgetch(this->create_login_window);
-        unsigned int* count;
-        char* buf;
         if (vertical_level == USERNAME_FIELD) {
             count = &uname_char_count;
             buf = cred->username;
@@ -114,17 +114,11 @@ LandingResult* LandingPage::wait_for_result() {
             case KEY_LEFT:
                 menu_driver(this->create_login_menu, REQ_LEFT_ITEM);
                 break;
-            case KEY_ENTER: case '\n':
-                if (current_item(this->create_login_menu) == items[0])
-                    return new LandingResult(cred, CREATE);
-                else
-                    return new LandingResult(cred, LOGIN);
-                break;
             case KEY_BACKSPACE: case KEY_DC: case KEY_DEL:
                 if (*count != 0) {
                     form_driver(this->credentials_form, REQ_DEL_PREV);
                     buf[*count] = '\0';
-                    *count --;
+                    (*count)--;
                 }
                 break;
             case 'h': case 'H':
@@ -133,6 +127,12 @@ LandingResult* LandingPage::wait_for_result() {
             case 'e': case 'E':
                 this->handle_exit();
                 break;
+            case KEY_ENTER: case '\n':
+                if (current_item(this->create_login_menu) == items[0])
+                    return new LandingResult(cred, CREATE);
+                else
+                    return new LandingResult(cred, LOGIN);
+                break;
             default:
                 if (32 < c && c < 127 && *count < TEXT_LENGTH - 1) {
                     buf[*count] = c;
@@ -140,7 +140,7 @@ LandingResult* LandingPage::wait_for_result() {
                         form_driver(this->credentials_form, c);
                     else
                         form_driver(this->credentials_form, '*');
-                    *count ++;
+                    (*count)++;
                 }
                 break;
         }
