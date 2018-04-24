@@ -3,12 +3,6 @@
 #include "page.h"
 
 namespace ui {
-    class Request {
-        public:
-            unsigned int account_number;
-            unsigned int amount;
-            Request(unsigned int account_number, unsigned int ammount);
-    };
 
     enum HomeRequestType {
         DEPOSIT,
@@ -17,9 +11,9 @@ namespace ui {
 
     class HomeResult {
         public:
-            Request* request;
+            double amount;
             HomeRequestType type;
-            HomeResult(Request* req, HomeRequestType type);
+            HomeResult(double amount, HomeRequestType type);
             ~HomeResult();
     };
 
