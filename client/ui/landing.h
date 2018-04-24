@@ -11,12 +11,12 @@ using namespace std;
 
 namespace ui {
 
-    class LandingCredential {
+    class Credential {
         public:
             char* username;
             char* password;
-            LandingCredential();
-            ~LandingCredential();
+            Credential();
+            ~Credential();
     };
 
     enum LandingSubmitType {
@@ -26,9 +26,9 @@ namespace ui {
 
     class LandingResult {
         public:
-            LandingCredential* cred;
+            Credential* cred;
             LandingSubmitType type;
-            LandingResult(LandingCredential* cred, LandingSubmitType type);
+            LandingResult(Credential* cred, LandingSubmitType type);
             ~LandingResult();
     };
 
