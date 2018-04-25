@@ -1,16 +1,15 @@
 #include <curses.h>
 #include <form.h>
+#include <cstdlib>
 
 #include "home.h"
 
-using namespace ui;
-
+using namespace ui; 
 #define W_WIDTH         40
 #define W_HEIGHT        10
 
 #define SUB_M_WIDTH     20
 #define SUB_M_HEIGHT    3
-
 #define TEXT_LENGTH     20
 
 HomeResult::HomeResult(double amount, HomeRequestType type) {
@@ -19,11 +18,11 @@ HomeResult::HomeResult(double amount, HomeRequestType type) {
 }
 
 HomePage::HomePage() {
-    ITEM* items[3];
-    items[0] = new_item("Withdrawl", "");
-    items[1] = new_item("Deposit", "");
-    items[2] = new_item("", "");
-    this->withdrawl_deposit_menu = new_menu(items);
+    this->withdrawl_deposit_menu_items = (ITEM**) calloc(3, sizeof(ITEM*));
+    this->withdrawl_deposit_menu_items[0] = new_item("Withdrawl", "");
+    this->withdrawl_deposit_menu_items[1] = new_item("Deposit", "");
+    this->withdrawl_deposit_menu_items[2] = new_item("", "");
+    this->withdrawl_deposit_menu = new_menu(this->withdrawl_deposit_menu_items);
 
     this->withdrawl_deposit_window = derwin(this->enclosing_window,
             W_HEIGHT, W_WIDTH,
@@ -40,17 +39,17 @@ HomePage::HomePage() {
     set_menu_mark(this->withdrawl_deposit_menu, "");
     post_menu(this->withdrawl_deposit_menu);
 
-    FIELD* field[3];
-    field[0] = new_field(1, 10, 0, 0, 0, 0);    // Amount label
-    field_opts_off(field[0], O_ACTIVE);
-    set_field_buffer(field[0], 0, "Amount: ");
+    this->amount_form_fields = (FIELD**) calloc(3, sizeof(FIELD*));
+    this->amount_form_fields[0] = new_field(1, 10, 0, 0, 0, 0);    // Amount label
+    field_opts_off(this->amount_form_fields[0], O_ACTIVE);
+    set_field_buffer(this->amount_form_fields[0], 0, "Amount: ");
 
-    field[1] = new_field(1, TEXT_LENGTH, 0, 10, 0, 0);   // Amount entry
-    set_field_back(field[1], A_UNDERLINE);
-    field_opts_off(field[1], O_AUTOSKIP);
+    this->amount_form_fields[1] = new_field(1, TEXT_LENGTH, 0, 10, 0, 0);   // Amount entry
+    set_field_back(this->amount_form_fields[1], A_UNDERLINE);
+    field_opts_off(this->amount_form_fields[1], O_AUTOSKIP);
 
-    field[2] = NULL;
-    this->amount_form = new_form(field);
+    this->amount_form_fields[2] = NULL;
+    this->amount_form = new_form(this->amount_form_fields);
     int form_w, form_h;
     scale_form(this->amount_form, &form_h, &form_w);
     set_form_win(this->amount_form, this->withdrawl_deposit_window);
@@ -61,6 +60,28 @@ HomePage::HomePage() {
     post_form(this->amount_form);
 
     wrefresh(this->withdrawl_deposit_window);
+}
+
+HomePage::~HomePage() {
+    unsigned int count;
+
+    count = 0;
+    unpost_form(this->amount_form);
+    free_form(this->amount_form);
+    while (this->amount_form_fields[count] != NULL) {
+        free_field(this->amount_form_fields[count]);
+        count ++;
+    }
+    free(this->amount_form_fields);
+
+    count = 0;
+    unpost_menu(this->withdrawl_deposit_menu);
+    free_menu(this->withdrawl_deposit_menu);
+    while (this->withdrawl_deposit_menu_items[count] != NULL) {
+        free_item(this->withdrawl_deposit_menu_items[count]);
+        count ++;
+    }
+    free(this->withdrawl_deposit_menu_items);
 }
 
 HomeResult* HomePage::wait_for_result() {

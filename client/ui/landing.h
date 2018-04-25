@@ -34,8 +34,10 @@ namespace ui {
 
     class LandingPage : public Page {
         private:
-            FORM* credentials_form;
+            FORM* credential_form;
+            FIELD** credential_form_fields;
             MENU* create_login_menu;
+            ITEM** create_login_menu_items;
             WINDOW* create_login_window;
         public:
             LandingPage();
