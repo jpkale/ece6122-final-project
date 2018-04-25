@@ -17,7 +17,6 @@ namespace ui {
             void handle_exit();
             void popup(std::string message);
         protected:
-            MENU* help_menu;
             WINDOW *help_window;
             WINDOW *enclosing_window;
             int width;

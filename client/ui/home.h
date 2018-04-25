@@ -19,9 +19,11 @@ namespace ui {
 
     class HomePage : public Page {
         private:
-            MENU* withdrawl_deposit_menu;
-            WINDOW* withdrawl_deposit_window;
             FORM* amount_form;
+            FIELD** amount_form_fields;
+            MENU* withdrawl_deposit_menu;
+            ITEM** withdrawl_deposit_menu_items;
+            WINDOW* withdrawl_deposit_window;
         public:
             HomeResult* wait_for_result();
             HomePage();

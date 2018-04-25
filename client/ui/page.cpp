@@ -35,22 +35,14 @@ Page::Page() {
     box(this->help_window, 0, 0);
     mvwprintw(this->help_window, 1, 1, "(F1) Help | (F2) Exit");
 
-    set_menu_win(this->help_menu, this->help_window);
-    set_menu_sub(this->help_menu, derwin(this->help_window,
-                HELP_W_HEIGHT - 1,
-                HELP_W_WIDTH - 1, 1, 1));
-    set_menu_format(this->help_menu, 1, 2);
-    set_menu_mark(this->help_menu, "");
-
     // Refresh before returning
-    post_menu(this->help_menu);
     wrefresh(this->help_window);
     wrefresh(this->enclosing_window);
 }
 
 Page::~Page() {
-    // FIXME free a bunch of other shit
-    free_menu(this->help_menu);
+    delwin(this->help_window);
+    delwin(this->enclosing_window);
     endwin();
 }
 

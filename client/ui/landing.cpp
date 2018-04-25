@@ -18,11 +18,11 @@ using namespace ui;
 #define KEY_DEL         127
 
 LandingPage::LandingPage() : Page() {
-    ITEM* items[3];
-    items[0] = new_item("Create Account", "");
-    items[1] = new_item("Login", "");
-    items[2] = new_item("", "");
-    this->create_login_menu = new_menu(items);
+    this->create_login_menu_items = (ITEM**) calloc(3, sizeof(ITEM*));
+    this->create_login_menu_items[0] = new_item("Create Account", "");
+    this->create_login_menu_items[1] = new_item("Login", "");
+    this->create_login_menu_items[2] = new_item("", "");
+    this->create_login_menu = new_menu(this->create_login_menu_items);
 
     this->create_login_window = derwin(this->enclosing_window,
             W_HEIGHT, W_WIDTH,
@@ -34,44 +34,62 @@ LandingPage::LandingPage() : Page() {
     set_menu_win(this->create_login_menu, this->create_login_window);
     set_menu_sub(this->create_login_menu,
             derwin(this->create_login_window, SUB_M_HEIGHT, SUB_M_WIDTH,
-            (W_HEIGHT - SUB_M_HEIGHT), (W_WIDTH - SUB_M_WIDTH) / 2));
+                (W_HEIGHT - SUB_M_HEIGHT), (W_WIDTH - SUB_M_WIDTH) / 2));
     set_menu_format(this->create_login_menu, 1, 2);
     set_menu_mark(this->create_login_menu, "");
     post_menu(this->create_login_menu);
 
-    FIELD* field[5];
-    field[0] = new_field(1, 10, 0, 0, 0, 0);    // username label
-    field_opts_off(field[0], O_ACTIVE);
-    set_field_buffer(field[0], 0, "Username: ");
+    this->credential_form_fields = (FIELD**) calloc(5, sizeof(FIELD*));
+    this->credential_form_fields[0] = new_field(1, 10, 0, 0, 0, 0);    // username label
+    field_opts_off(this->credential_form_fields[0], O_ACTIVE);
+    set_field_buffer(this->credential_form_fields[0], 0, "Username: ");
 
-    field[1] = new_field(1, TEXT_LENGTH, 0, 10, 0, 0);   // username entry
-    set_field_back(field[1], A_UNDERLINE);
-    field_opts_off(field[1], O_AUTOSKIP);
+    this->credential_form_fields[1] = new_field(1, TEXT_LENGTH, 0, 10, 0, 0);   // username entry
+    set_field_back(this->credential_form_fields[1], A_UNDERLINE);
+    field_opts_off(this->credential_form_fields[1], O_AUTOSKIP);
 
-    field[2] = new_field(1, 10, 2, 0, 0, 0);    // password label
-    field_opts_off(field[2], O_ACTIVE);
-    set_field_buffer(field[2], 0, "Password: ");
+    this->credential_form_fields[2] = new_field(1, 10, 2, 0, 0, 0);    // password label
+    field_opts_off(this->credential_form_fields[2], O_ACTIVE);
+    set_field_buffer(this->credential_form_fields[2], 0, "Password: ");
 
-    field[3] = new_field(1, TEXT_LENGTH, 2, 10, 0, 0);   // password entry
-    set_field_back(field[3], A_UNDERLINE);
-    field_opts_off(field[3], O_AUTOSKIP);
+    this->credential_form_fields[3] = new_field(1, TEXT_LENGTH, 2, 10, 0, 0);   // password entry
+    set_field_back(this->credential_form_fields[3], A_UNDERLINE);
+    field_opts_off(this->credential_form_fields[3], O_AUTOSKIP);
 
-    field[4] = NULL;
-    this->credentials_form = new_form(field);
+    this->credential_form_fields[4] = NULL;
+    this->credential_form = new_form(this->credential_form_fields);
     int form_w, form_h;
-    scale_form(this->credentials_form, &form_h, &form_w);
-    set_form_win(this->credentials_form, this->create_login_window);
-    set_form_sub(this->credentials_form, derwin(this->create_login_window,
-        3, TEXT_LENGTH + 10,
-        2, (W_WIDTH - (TEXT_LENGTH + 10)) / 2));
+    scale_form(this->credential_form, &form_h, &form_w);
+    set_form_win(this->credential_form, this->create_login_window);
+    set_form_sub(this->credential_form, derwin(this->create_login_window,
+                3, TEXT_LENGTH + 10,
+                2, (W_WIDTH - (TEXT_LENGTH + 10)) / 2));
 
-    post_form(this->credentials_form);
+    post_form(this->credential_form);
 
     wrefresh(this->create_login_window);
 }
 
 LandingPage::~LandingPage() { 
-    // FIXME: Free shit
+    unsigned int count;
+
+    count = 0;
+    unpost_form(this->credential_form);
+    free_form(this->credential_form);
+    while (this->credential_form_fields[count] != NULL) {
+        free_field(this->credential_form_fields[count]);
+        count ++;
+    }
+    free(this->credential_form_fields);
+
+    count = 0;
+    unpost_menu(this->create_login_menu);
+    free_menu(this->create_login_menu);
+    while (this->create_login_menu_items[count] != NULL) {
+        free_item(this->create_login_menu_items[count]);
+        count ++;
+    }
+    free(this->create_login_menu_items);
 }
 
 enum VerticalLevel {
@@ -101,10 +119,10 @@ LandingResult* LandingPage::wait_for_result() {
         switch (c) {
             case KEY_STAB: case KEY_CTAB: case '\t':
                 if (vertical_level == USERNAME_FIELD) {
-                    form_driver(this->credentials_form, REQ_DOWN_FIELD);
+                    form_driver(this->credential_form, REQ_DOWN_FIELD);
                     vertical_level = PASSWORD_FIELD;
                 } else {
-                    form_driver(this->credentials_form, REQ_UP_FIELD);
+                    form_driver(this->credential_form, REQ_UP_FIELD);
                     vertical_level = USERNAME_FIELD;
                 }
                 break;
@@ -116,7 +134,7 @@ LandingResult* LandingPage::wait_for_result() {
                 break;
             case KEY_BACKSPACE: case KEY_DC: case KEY_DEL:
                 if (*count != 0) {
-                    form_driver(this->credentials_form, REQ_DEL_PREV);
+                    form_driver(this->credential_form, REQ_DEL_PREV);
                     buf[*count] = '\0';
                     (*count)--;
                 }
@@ -137,9 +155,9 @@ LandingResult* LandingPage::wait_for_result() {
                 if (32 < c && c < 127 && *count < TEXT_LENGTH - 1) {
                     buf[*count] = c;
                     if (vertical_level == USERNAME_FIELD)
-                        form_driver(this->credentials_form, c);
+                        form_driver(this->credential_form, c);
                     else
-                        form_driver(this->credentials_form, '*');
+                        form_driver(this->credential_form, '*');
                     (*count)++;
                 }
                 break;
