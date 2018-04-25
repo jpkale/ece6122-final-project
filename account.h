@@ -9,21 +9,21 @@ class account {
 public:
     //Constructors:
     account();
-    account(const char* accountNumber, double balance, const char* userID, const char* userPassword);
+    account(double accountNumber, double balance, const char* userID, const char* userPassword);
     //overloaded operators
 
     //member functions
-    void linkAccount(const char* accountNumber, accountHolder* a); //associates account number with an account holder
-    void deposit(const char* accountNumber, double depositAmount);
-    void withdrawal(const char* accountNumber, double withdrawAmount);
+    void linkAccount(double accountNumber, accountHolder* a); //associates account number(s) with an account holder
+    void deposit(double accountNumber, double depositAmount);
+    void withdrawal(double accountNumber, double withdrawAmount);
 //Data members
 public:
     double balance;
-    const char* accountNumber;
+    double accountNumber;
 
 private:
-    //hash for password encryption if needed or other private encryption data members
-    const char* hash;
-
+    //key for password encryption if needed or other private encryption data members
+    const char* key;
+    const char* userPassword;
 
 };
