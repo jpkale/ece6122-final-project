@@ -85,15 +85,15 @@ HomePage::~HomePage() {
 }
 
 HomeResult* HomePage::wait_for_result() {
-    unsigned int count;
-    char* buf;
-    ITEM** items = menu_items(this->withdrawl_deposit_menu);
+    char buf[TEXT_LENGTH];
+    unsigned int count = 0;
 
     while (true) {
         int c = wgetch(this->withdrawl_deposit_window);
         switch (c) {
             case KEY_ENTER: case '\n':
-                if (current_item(this->withdrawl_deposit_menu) == items[0])
+                if (current_item(this->withdrawl_deposit_menu) ==
+                        this->withdrawl_deposit_menu_items[0])
                     return new HomeResult(atof(buf), WITHDRAWL);
                 else
                     return new HomeResult(atof(buf), DEPOSIT);
@@ -105,7 +105,7 @@ HomeResult* HomePage::wait_for_result() {
                 this->handle_exit();
                 break;
             default:
-                if (count < TEXT_LENGTH && 48 < c < 57 || c == 46) {
+                if (count < TEXT_LENGTH && (('0' <= c && c <= '9') || c == 46)) {
                     form_driver(this->amount_form, c);
                     buf[count] = c;
                 }
