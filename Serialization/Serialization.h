@@ -1,0 +1,8 @@
+//
+// Created by Nick Dargi on 4/24/18.
+//
+
+#ifndef SERIALIZATIONCLASS_SERIALIZATION_H
+#define SERIALIZATIONCLASS_SERIALIZATION_H
+char* serializeinput();
+#endif //SERIALIZATIONCLASS_SERIALIZATION_H
