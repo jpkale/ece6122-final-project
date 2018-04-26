@@ -21,27 +21,45 @@ void createFile(string user, int accNum){
     name.append(".cvs");
     person.open(name, ios::app);
     person << "Account number: " << accNum << endl;
-    person << "Balance = " << balance << endl;
+    person << "Balance: " << balance << endl;
     person.close();
 };
 
-/**************************************************************************
+/********************************************************************************
  * Adds the data to the already created log file (updating the balance)
  * Variables to take in: user - to grab the file by user name
- *                       value - the new balance in the account
- **************************************************************************/
-void log(string user, int value){
+ *                       balance - the new balance in the account
+ *                       amount - the user ammount that was withdrawn/deposited
+ *                       flag - 1: deposit 2: withdrawal
+ ********************************************************************************/
+void log(string user, int balance, int amount, int flag){
     string name;
     name.append(user);
     name.append(".cvs");
     person.open(name, ios::app);
-    if(person.is_open()){       //checks to make sure file is open
-        person << "Balance: " << value << endl;
+    switch(flag) {
+        case 1:  //money is being deposited
+            if (person.is_open()) {       //checks to make sure file is open
+                person << "User deposited: " << amount << endl;
+                person << "Balance: " << balance << endl;
+            } else {
+                cout << "Unable to open file";
+            }
+            person.close();
+            break;
+        case 2:  //money is being withdrawn
+            if (person.is_open()) {       //checks to make sure file is open
+                person << "User withdrew: " << amount << endl;
+                person << "Balance: " << balance << endl;
+            } else {
+                cout << "Unable to open file";
+            }
+            person.close();
+            break;
+        default:
+            cout << "flag was not set correct" << endl;
+            break;
     }
-    else {
-        cout << "Unable to open file";
-    }
-    person.close();
 }
 
 /*******************************************************************
@@ -80,7 +98,6 @@ int getAcctNum(string user)
     data.open(name);
     if(data.is_open()){     //checks to make sure file is open
         data >> part1 >> part2 >> part3;
-        cout << part1 << endl;
     }
     else {
         cout << "Unable to open file" << endl;
@@ -91,9 +108,9 @@ int getAcctNum(string user)
 
 int main() {
     string userNam , Dline;
-    int option, accunt, balance, newbalance, oldbalance;
+    int option, accunt, balance, newbalance, Uservalue;
 
-    cout << "1) New user 2) Check Balance (Read Data)  3) Add money (Write Data)  4) Accnt Num" << endl;
+    cout << "1) New user 2) Check Balance (Read Data)  3) Add money (Write Data) 4) Withdraw money 5) Accnt Num" << endl;
     cin >> option;
 
     cout << "Name:" << endl;
@@ -112,12 +129,19 @@ int main() {
             break;
         case 3:
             cout << "Money to add:" << endl;
-            cin >> balance;
-            oldbalance = getBalance(userNam);
-            newbalance = balance + oldbalance;
-            log(userNam, newbalance);
+            cin >> Uservalue;
+            balance = getBalance(userNam);
+            newbalance = balance + Uservalue;
+            log(userNam, newbalance, Uservalue, 1);
             break;
         case 4:
+            cout << "Money to withdraw:" << endl;
+            cin >> Uservalue;
+            balance = getBalance(userNam);
+            newbalance = balance - Uservalue;
+            log(userNam, newbalance, Uservalue, 2);
+            break;
+        case 5:
             accunt = getAcctNum(userNam);
             cout << "Account number is: " << accunt << endl;
             break;
