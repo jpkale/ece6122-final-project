@@ -1,10 +1,9 @@
 // This module encrypts data using a key
 // Created by Terrence Thurk on 4/17/18.
-//Todo: pass references instead of copies
 
 #include <iostream>
 #include <string>
-
+#include "encryption.h"
 using namespace std;
 
 //This function performs XOR encryption on the data
@@ -128,7 +127,7 @@ string ASCIIShift(const string data, const string key, bool encrypt){
             ASCIIcode = (data[i] + key[i % keyLength]) % 255;
             cipher[i] = (char)ASCIIcode;
         }
-        //if encrypt is false then the program shifts to decrypt
+            //if encrypt is false then the program shifts to decrypt
         else {
             ASCIIcode = (data[i] - key[i %keyLength]) % 255;
             cipher[i] = (char)ASCIIcode;
@@ -137,72 +136,12 @@ string ASCIIShift(const string data, const string key, bool encrypt){
     return cipher;
 }
 
-int main() {
-    string data = "Terry deposited $300 to Checkings Account 1457";
-    string key = "H@x0Rs";
-//    cout<<"original message:"<<endl;
-//    cout<<data<<endl;
-//    cout<<"encryped message:"<<endl;
-//    string encrypted = XOREncryption(data, key);
-//    cout<<encrypted<<endl;
-//    cout<<"decrypted message:"<<endl;
-//    cout<<XOREncryption(encrypted, key)<<endl;
+//encrypt function to chain together XOR, ASCII, and Cesar Shifts
+string encryption::encrypt(const string data, const string key){
+    return XOREncryption(ASCIIShift(CShift(data, key, true), key, true), key);
+}
 
-//    cout<<"original message:"<<endl;
-//    cout<<data<<endl;
-//    cout<<"encryped message:"<<endl;
-//    string encrypted = CShift(data, key, true);
-//    cout<<encrypted<<endl;
-//    cout<<"decrypted message:"<<endl;
-//    cout<< CShift(encrypted, key, false)<<endl;
-
-//    cout << "original message:" << endl;
-//    cout << data << endl;
-//    cout << "encryption begins!!!" << endl;
-//    cout << "scrambled message:" << endl;
-//    string shifted = CShift(data, key, true);
-//    cout << shifted << endl;
-//    cout << "encrypted scrambled message:" << endl;
-//    string encrypted = XOREncryption(shifted, key);
-//    cout << encrypted << endl;
-//    cout << "\ndecryption begins!" << endl;
-//    cout << "decrypted scrambled message" << endl;
-//    string decryptedShifted = XOREncryption(encrypted, key);
-//    cout << decryptedShifted << endl;
-//    cout << "decrypted message:" << endl;
-//    cout << CShift(decryptedShifted, key, false) << endl;
-
-    cout << "original message:" << endl;
-    cout << data << endl;
-    cout << "encryption begins!!!" << endl;
-    cout << "scrambled message:" << endl;
-    string scrambled = CShift(data, key, true);
-    cout << scrambled << endl;
-    cout << "shifted scrambled message:" << endl;
-    string shifted = ASCIIShift(scrambled, key, true);
-    cout << shifted << endl;
-    cout << "encrypted shifted scrambled message:" << endl;
-    string encrypted = XOREncryption(shifted, key);
-    cout << encrypted << endl;
-    cout << "\ndecryption begins!" << endl;
-    cout << "decrypted shifted scrambled message:" << endl;
-    string decryptedShifted = XOREncryption(encrypted, key);
-    cout << decryptedShifted << endl;
-    cout << "shifted scrambeled message:" << endl;
-    shifted = ASCIIShift(decryptedShifted, key, false);
-    cout << shifted << endl;
-    cout << "scrambled message:";
-    scrambled = CShift(shifted, key, false);
-    cout << "decrypted message:" << endl;
-    cout << scrambled << endl;
-
-
-/*    cout<<"original message:"<<endl;
-    cout<<data<<endl;
-    cout<<"encryped message:"<<endl;
-    string encrypted = ASCIIShift(data, key, true);
-    cout<<encrypted<<endl;
-    cout<<"decrypted message:"<<endl;
-    cout<< ASCIIShift(encrypted, key, false)<<endl;*/
-
+//decrypt function to chain together Cesar Shift, ASCII, and XOR
+string encryption::decrypt(const string encryptedData, const string key){
+    return CShift(ASCIIShift(XOREncryption(encryptedData, key), key, false), key, false);
 }
