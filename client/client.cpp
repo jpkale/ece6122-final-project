@@ -10,10 +10,13 @@ using namespace std;
 using namespace ui;
 using namespace std;
 
-typedef struct _LoginResult {
+struct LoginResult {
     double balance;
     bool was_successful;
-} LoginResult;
+    LoginResult() : balance(0), was_successful(false) {};
+    LoginResult(double balance, bool was_successful) :
+        balance(balance), was_successful(was_successful) {};
+};
 
 /*
  * Given a credential, log into the server.  Return the a LoginResult with the
@@ -23,7 +26,7 @@ typedef struct _LoginResult {
  */
 LoginResult login(Credential* cred) {
     // TODO: Implement
-    return LoginResult { 0, true };
+    return LoginResult(0, false);
 }
 
 /*
@@ -36,10 +39,13 @@ bool create_account(Credential* cred) {
     return false;
 }
 
-typedef struct _TransactionResult {
+struct TransactionResult {
     double remaining_balance;
     bool was_successful;
-} TransactionResult;
+    TransactionResult() : remaining_balance(0), was_successful(false) {};
+    TransactionResult(double remaining_balance, bool was_successful) : 
+        remaining_balance(remaining_balance), was_successful(was_successful) {};
+};
 
 /*
  * Given a credential and an amount, deposit that amount of money into the
@@ -49,7 +55,7 @@ typedef struct _TransactionResult {
  */
 TransactionResult deposit(Credential* cred, double amount) {
     // TODO: Implement
-    return TransactionResult { 0, false };
+    return TransactionResult(0, false);
 }
 
 /*
@@ -60,7 +66,7 @@ TransactionResult deposit(Credential* cred, double amount) {
  */
 TransactionResult withdrawal(Credential* cred, double amount) {
     // TODO: Implement
-    return TransactionResult { 0, false };
+    return TransactionResult(0, false);
 }
 
 void handle_login(LandingPage* lp, Credential* cred) {
