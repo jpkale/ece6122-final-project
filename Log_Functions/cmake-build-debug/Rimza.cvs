@@ -1,3 +1,4 @@
 Account number: 12345
-Balance = 0
-Balance = 50
+Balance: 0
+User deposited: 50
+Balance: 50

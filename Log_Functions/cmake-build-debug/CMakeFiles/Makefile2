@@ -53,10 +53,10 @@ RM = "C:\Program Files\JetBrains\CLion 2017.3.2\bin\cmake\bin\cmake.exe" -E remo
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\212410438\CLionProjects\final_test
+CMAKE_SOURCE_DIR = C:\Users\212410438\CLionProjects\Log_Functions
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\212410438\CLionProjects\final_test\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\212410438\CLionProjects\Log_Functions\cmake-build-debug
 
 #=============================================================================
 # Target rules for target CMakeFiles/final_test.dir
@@ -65,7 +65,7 @@ CMAKE_BINARY_DIR = C:\Users\212410438\CLionProjects\final_test\cmake-build-debug
 CMakeFiles/final_test.dir/all:
 	$(MAKE) -f CMakeFiles\final_test.dir\build.make CMakeFiles/final_test.dir/depend
 	$(MAKE) -f CMakeFiles\final_test.dir\build.make CMakeFiles/final_test.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\212410438\CLionProjects\final_test\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target final_test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\212410438\CLionProjects\Log_Functions\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target final_test"
 .PHONY : CMakeFiles/final_test.dir/all
 
 # Include target in all.
@@ -75,9 +75,9 @@ all: CMakeFiles/final_test.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/final_test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\212410438\CLionProjects\final_test\cmake-build-debug\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\212410438\CLionProjects\Log_Functions\cmake-build-debug\CMakeFiles 2
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/final_test.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\212410438\CLionProjects\final_test\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\212410438\CLionProjects\Log_Functions\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/final_test.dir/rule
 
 # Convenience name for target.
