@@ -7,3 +7,11 @@ char* serializeinput()
 {
 
 }
+char* serializedeposit()
+{
+
+}
+char* serializewithdrawl()
+{
+
+}
