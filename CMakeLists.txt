@@ -4,6 +4,9 @@ cmake_minimum_required (VERSION 2.6)
 project (BankingAppClient)
 project (BankingAppServer)
 
+add_executable (BankingAppClient client/client.cpp)
+add_executable (BankingAppServer server/server.cpp server/encryption.cpp)
+=======
 file (GLOB CLIENT_MAIN client/client.cpp)
 file (GLOB CLIENT_HEADERS client/*/*.h)
 file (GLOB CLIENT_SOURCES client/*/*.cpp)
@@ -21,3 +24,4 @@ find_package (Curses REQUIRED)
 set (ADDITIONAL_LIBRARIES menu form)
 include_directories (${CURSES_INCLUDE_DIR})
 target_link_libraries (BankingAppClient ${CURSES_LIBRARIES} ${ADDITIONAL_LIBRARIES})
+
