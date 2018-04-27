@@ -5,8 +5,7 @@
 #include <curses.h>
 #include <menu.h>
 
-#define FOCUSED     1
-#define UNFOCUSED   2
+using namespace std;
 
 namespace ui {
     class Page {
@@ -15,7 +14,7 @@ namespace ui {
             ~Page(); 
             void show_help();
             void handle_exit();
-            void popup(std::string message);
+            void popup(string format, ...);
         protected:
             WINDOW *help_window;
             WINDOW *enclosing_window;

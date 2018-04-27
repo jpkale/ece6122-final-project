@@ -2,6 +2,7 @@
 
 #include <curses.h>
 #include <menu.h>
+#include <stdarg.h>
 
 #include <cstdlib>
 #include <string>
@@ -19,8 +20,6 @@ Page::Page() {
 
     if (has_colors()) {
         start_color();
-        init_pair(FOCUSED, COLOR_BLACK, COLOR_WHITE);
-        init_pair(UNFOCUSED, COLOR_WHITE, COLOR_BLACK);
     }
 
     getmaxyx(stdscr, this->height, this->width);
@@ -53,28 +52,28 @@ void Page::handle_exit() {
 }
 
 void Page::show_help() {
-    WINDOW* window = newwin(6, 48, (this->height - 6) / 2, (this->width - 48) / 2);
-    box(window, 0, 0);
-    keypad(window, true);
-    mvwprintw(window, 1, 1, "Help:");
-    mvwprintw(window, 2, 1, " - Use arrows to navigate.");
-    mvwprintw(window, 3, 1, " - Press enter to select a button");
-    mvwprintw(window, 4, 1, " - Press any key to return to previous window");
-    wrefresh(window);
-    wgetch(window);
-    wclear(window);
-    wrefresh(window);
-    delwin(window);
-    touchwin(this->enclosing_window);
-    wrefresh(this->enclosing_window);
+    this->popup("HELP\n - Use LEFT and RIGHT arrows to navigate.\n - Press enter to select a button\n - Use TAB to navigate fields\n - Press F2 to exit\n");
 }
 
-void Page::popup(string message) {
-    WINDOW* window = newwin(6, 48, (this->height - 6) / 2, (this->width - 48) / 2);
-    box(window, 0, 0);
+void Page::popup(string format, ...) {
+    WINDOW* window = newwin(8, 60, (this->height - 8) / 2, (this->width - 60) / 2);
     keypad(window, true);
-    mvwprintw(window, 2, 1, message.c_str());
-    mvwprintw(window, 3, 1, "Press any key to continue");
+    box(window, 0, 0);
+
+    va_list args;
+    va_start(args, format);
+
+    size_t pos = 0, count = 0;;
+    std::string token;
+    while ((pos = format.find("\n")) != std::string::npos && count < 5) {
+        token = format.substr(0, pos);
+        wmove(window, count + 1, 1);
+        vwprintw(window, token.c_str(), args);
+        format.erase(0, pos + 1);
+        count ++;
+    }
+
+    mvwprintw(window, 6, 1, "Press any key to continue.");
     wrefresh(window);
     wgetch(window);
     wclear(window);
@@ -82,4 +81,6 @@ void Page::popup(string message) {
     delwin(window);
     touchwin(this->enclosing_window);
     wrefresh(this->enclosing_window);
+
+    va_end(args);
 }
