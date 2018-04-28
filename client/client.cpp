@@ -1,5 +1,14 @@
-#include <thread>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <netinet/in.h>
 #include "../Sockets/CreateClient/ClientFunc.h";
+#include "../Sockets/Serialization/Serialize.h";
 #include "ui/landing.h"
 #include "ui/home.h"
 #include "ui/page.h"
@@ -9,7 +18,8 @@ using namespace std;
 
 using namespace ui;
 using namespace std;
-
+int socketID;
+char buffer[256];
 struct LoginResult {
     double balance;
     bool was_successful;
@@ -25,7 +35,19 @@ struct LoginResult {
  * ignored in this case).
  */
 LoginResult login(Credential* cred) {
-    // TODO: Implement
+    int classifier;
+    bzero(buffer,256);
+    std::string serializeddata = serializecredential(cred);
+    strcpy(buffer,serializeddata.c_str());
+    classifier = write(socketID,buffer,strlen(buffer));
+    if (classifier < 0) {
+        //error("ERROR with connection to Server");
+    }
+    bzero(buffer,256);
+    classifier = read(socketID,buffer,255);
+    if (classifier < 0) {
+        //error("ERROR with connection to Server");
+    }
     return LoginResult(0, false);
 }
 
@@ -117,7 +139,7 @@ void handle_create_account(LandingPage* lp, Credential* cred) {
 }
 
 int main(int argc, char* argv[]) {
-    int socketID = clientcreator(argv[2],argv[1]);
+    socketID = clientcreator(argv[2],argv[1]);
     LandingPage* lp = new LandingPage();
     LandingResult* lr = lp->wait_for_result();
 
