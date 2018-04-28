@@ -1,8 +1,6 @@
 #ifndef BANKINGAPPSERVER_ACCOUNT_H
 #define BANKINGAPPSERVER_ACCOUNT_H
 
-#endif //BANKINGAPPSERVER_ACCOUNT_H
-
 #include <string>
 #include "accountHolder.h"
 
@@ -31,3 +29,5 @@ private:
     std::string userPassword;
 
 };
+
+#endif //BANKINGAPPSERVER_ACCOUNT_H
