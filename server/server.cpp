@@ -6,17 +6,17 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include "../Sockets/CreateServer/ServerFunc.h";
-#include "../Sockets/Serialization/Serialize.h";
+#include "../Sockets/CreateServer/ServerFunc.h"
+#include "../Sockets/Serialization/Serialize.h"
 #include <sstream>
-// Placeholder for now
 int main(int argc, char *argv[]) {
     int socketID, n;
     bool was_successful;
     double balance;
     char buffer[256];
+    int b = 1;
     socketID = servercreator(argv[1]);
-    while(1)
+    while(b)
     {
         bzero(buffer,256);
         n = read(socketID,buffer,255);
@@ -39,14 +39,14 @@ int main(int argc, char *argv[]) {
                 if (was_successful)
                 {
                     strs << balance;
-                    std::string sendstring = "1," + strs.str();
+                    std::string sendstring = "1," + strs.str() + ",";
                     strcpy(buffer,sendstring.c_str());
                     n = write(socketID,buffer,strlen(buffer));//Will Send True if successful followed by balance
                 }
                 else
                 {
                     strs << balance;
-                    std::string sendstring = "0," + strs.str();
+                    std::string sendstring = "0," + strs.str() + ",";
                     strcpy(buffer,sendstring.c_str());
                     n = write(socketID,"0",1);//Will Send False if unsuccessful followed by balance
                 }
@@ -55,14 +55,14 @@ int main(int argc, char *argv[]) {
                 if (was_successful)
                 {
                     strs << balance;
-                    std::string sendstring = "1," + strs.str();
+                    std::string sendstring = "1," + strs.str() + ",";
                     strcpy(buffer,sendstring.c_str());
                     n = write(socketID,buffer,strlen(buffer));///Will Send True if successful followed by balance
                 }
                 else
                 {
                     strs << balance;
-                    std::string sendstring = "0," + strs.str();
+                    std::string sendstring = "0," + strs.str() + ",";
                     strcpy(buffer,sendstring.c_str());
                     n = write(socketID,buffer,strlen(buffer));///Will Send False if unsuccessful followed by balance
                 }
@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
                 if (was_successful)
                 {
                     strs << balance;
-                    std::string sendstring = "1," + strs.str();
+                    std::string sendstring = "1," + strs.str() + ",";
                     strcpy(buffer,sendstring.c_str());
                     n = write(socketID,buffer,strlen(buffer));///Will Send True if successful followed by balance
                 }

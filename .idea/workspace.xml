@@ -13,15 +13,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89ca35ad-6c1c-4ebb-b991-2535c99fb0e5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/Sockets/Serialization/Serialize.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Sockets/Serialization/Serialize.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sockets/Serialization/Serialization.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sockets/Serialization/Serialization.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sockets/Serialization/Serialize.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Sockets/Serialization/Serialize.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sockets/Serialization/Serialize.h" beforeDir="false" afterPath="$PROJECT_DIR$/Sockets/Serialization/Serialize.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/client.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/client/client.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/landing.h" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/landing.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/BankingAppServer.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/BankingAppServer.cbp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -35,11 +29,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="client.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="client.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/client.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="40" column="4" lean-forward="true" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="42" />
+            <state relative-caret-position="531">
+              <caret line="128" column="52" selection-start-line="128" selection-start-column="52" selection-end-line="128" selection-end-column="52" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -47,19 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/ui/home.h">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="server.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="server.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/server.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1185">
-              <caret line="79" column="38" selection-start-line="79" selection-start-column="38" selection-end-line="79" selection-end-column="38" />
-              <folding>
-                <element signature="e#1#19#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="120">
+              <caret line="8" column="47" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -99,8 +85,8 @@
       <file leaf-file-name="Serialize.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Sockets/Serialization/Serialize.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="19" lean-forward="true" selection-start-line="20" selection-start-column="4" selection-end-line="21" selection-end-column="19" />
+            <state relative-caret-position="650">
+              <caret line="57" column="9" lean-forward="true" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
               <folding>
                 <element signature="e#44#66#0" expanded="true" />
               </folding>
@@ -116,8 +102,17 @@
       <file leaf-file-name="Serialize.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Sockets/Serialization/Serialize.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" selection-start-line="18" selection-end-line="18" selection-end-column="35" />
+            <state relative-caret-position="285">
+              <caret line="19" selection-start-line="19" selection-end-line="19" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="landing.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/ui/landing.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2430">
+              <caret line="167" selection-start-line="167" selection-end-line="167" />
             </state>
           </provider>
         </entry>
@@ -146,10 +141,10 @@
         <option value="$PROJECT_DIR$/Sockets/Serialization/Serialization.cpp" />
         <option value="$PROJECT_DIR$/Sockets/CreateClient/ClientFunc.h" />
         <option value="$PROJECT_DIR$/client/ui/landing.h" />
-        <option value="$PROJECT_DIR$/client/client.cpp" />
+        <option value="$PROJECT_DIR$/server/server.cpp" />
         <option value="$PROJECT_DIR$/Sockets/Serialization/Serialize.h" />
         <option value="$PROJECT_DIR$/Sockets/Serialization/Serialize.cpp" />
-        <option value="$PROJECT_DIR$/server/server.cpp" />
+        <option value="$PROJECT_DIR$/client/client.cpp" />
       </list>
     </option>
   </component>
@@ -263,12 +258,12 @@
       <updated>1524796573311</updated>
       <workItem from="1524796575091" duration="943000" />
       <workItem from="1524934839140" duration="1694000" />
-      <workItem from="1524937336361" duration="8253000" />
+      <workItem from="1524937336361" duration="11489000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10890000" />
+    <option name="totallyTimeSpent" value="14126000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -276,6 +271,7 @@
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32900944" />
       <window_info anchor="bottom" id="CMake" order="7" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32900944" />
@@ -291,7 +287,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.32980132" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32900944" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -319,6 +314,11 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/client/client.cpp">
@@ -454,13 +454,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/ui/landing.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2430">
-          <caret line="167" selection-start-line="167" selection-end-line="167" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Sockets/Serialization/Serialization.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -487,6 +480,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/ui/landing.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/ui/landing.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2430">
+          <caret line="167" selection-start-line="167" selection-end-line="167" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="47" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sockets/CreateClient/ClientFunc.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="42" lean-forward="true" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Sockets/CreateClient/ClientFunc.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -500,53 +521,29 @@
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Sockets/CreateClient/ClientFunc.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="42" lean-forward="true" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/ui/landing.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Sockets/Serialization/Serialize.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" selection-start-line="18" selection-end-line="18" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Sockets/Serialization/Serialize.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="19" lean-forward="true" selection-start-line="20" selection-start-column="4" selection-end-line="21" selection-end-column="19" />
+        <state relative-caret-position="650">
+          <caret line="57" column="9" lean-forward="true" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
           <folding>
             <element signature="e#44#66#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/client.cpp">
+    <entry file="file://$PROJECT_DIR$/Sockets/Serialization/Serialize.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="40" column="4" lean-forward="true" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-end-line="19" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/server.cpp">
+    <entry file="file://$PROJECT_DIR$/client/client.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1185">
-          <caret line="79" column="38" selection-start-line="79" selection-start-column="38" selection-end-line="79" selection-end-column="38" />
+        <state relative-caret-position="531">
+          <caret line="128" column="52" selection-start-line="128" selection-start-column="52" selection-end-line="128" selection-end-column="52" />
           <folding>
-            <element signature="e#1#19#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>

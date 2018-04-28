@@ -6,21 +6,21 @@
 #include <sstream>
 std::string serializecredentialcreate(Credential cred)
 {
-    std::string output = "1,"+cred.username +"," + cred.password;
+    std::string output = "1,"+cred.username +"," + cred.password + ",";
     return output;
 }
 std::string serializedeposit(Credential cred,double amount)
 {
     std::ostringstream strs;
     strs << amount;
-    std::string output = "2,"+cred.username +"," + cred.password +"," + strs.str();
+    std::string output = "2,"+cred.username +"," + cred.password +"," + strs.str() + ",";
     return output;
 }
 std::string serializewithdrawl(Credential cred,double amount)
 {
     std::ostringstream strs;
     strs << amount;
-    std::string output = "3,"+cred.username +"," + cred.password + "," + strs.str();
+    std::string output = "3,"+cred.username +"," + cred.password + "," + strs.str() + ",";
     return output;
 }
 int determineprocess(char* input)
@@ -31,7 +31,7 @@ int determineprocess(char* input)
 }
 std::string serializecredentiallogin(Credential cred)
 {
-    std::string output = "4,"+cred.username +"," + cred.password;
+    std::string output = "4,"+cred.username +"," + cred.password + ",";
     return output;
 }
 bool determinesuccess(char* input)
@@ -45,4 +45,22 @@ bool determinesuccess(char* input)
     {
         return false;
     }
+}
+double returnbalance(char* input)
+{
+    double balance;
+    std::string placeholder;
+    for(int i = 2;i<256;i++)
+    {
+        if(input[i] == 44)
+        {
+            break;
+        }
+        else
+        {
+            placeholder.push_back(input[i]);
+        }
+    }
+    balance = std::stod(placeholder);
+    return balance;
 }

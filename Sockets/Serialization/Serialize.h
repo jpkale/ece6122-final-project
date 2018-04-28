@@ -17,4 +17,5 @@ std::string serializedeposit(Credential cred,double amount);
 int determineprocess(char* input);
 std::string serializecredentiallogin(Credential cred);
 bool determinesuccess(char* input);
+double returnbalance(char* input);
 #endif //BANKINGAPPSERVER_SERIALIZE_H
