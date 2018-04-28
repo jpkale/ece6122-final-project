@@ -5,23 +5,25 @@
 #include <string>
 
 #include "accountHolder.h"
-#include <string>
 
 using namespace std;
 
 //Constructors
-accountHolder::accountHolder(){
+accountHolder::accountHolder()
+{
     name       = " ";
     middleInit = " ";
     lastName   = " ";
 }
 
-accountHolder::accountHolder(const char *nameU, const char *lastNameU) {
+accountHolder::accountHolder(const char *nameU, const char *lastNameU)
+{
     name       = nameU;
     lastName   = lastNameU;
 }
 
-accountHolder::accountHolder(const char *nameU, const char *middleInitU, const char *lastNameU) {
+accountHolder::accountHolder(const char *nameU, const char *middleInitU, const char *lastNameU)
+{
     name       = nameU;
     lastName   = lastNameU;
     middleInit = middleInitU;

@@ -1,10 +1,9 @@
 #ifndef BANKINGAPPSERVER_ACCOUNTHOLDER_H
 #define BANKINGAPPSERVER_ACCOUNTHOLDER_H
 
-#endif //BANKINGAPPSERVER_ACCOUNTHOLDER_H
 #include <string>
 
-class account;
+//class account;
 
 class accountHolder{
 public:
@@ -34,3 +33,5 @@ private:
     double account;
 
 };
+
+#endif //BANKINGAPPSERVER_ACCOUNTHOLDER_H
