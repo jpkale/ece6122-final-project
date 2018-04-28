@@ -4,7 +4,7 @@
 
 #ifndef SERIALIZATIONCLASS_SERIALIZATION_H
 #define SERIALIZATIONCLASS_SERIALIZATION_H
-char* serializeaccount();
+char* serializecredential();
 char* serializewithdrawl();
 char* serializedeposit();
 #endif //SERIALIZATIONCLASS_SERIALIZATION_H

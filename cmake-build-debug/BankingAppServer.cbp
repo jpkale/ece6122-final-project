@@ -126,6 +126,18 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/Sockets/CreateClient/ClientFunc.cpp">
+			<Option target="BankingAppClient"/>
+		</Unit>
+		<Unit filename="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/Sockets/CreateClient/ClientFunc.h">
+			<Option target="BankingAppClient"/>
+		</Unit>
+		<Unit filename="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/Sockets/CreateServer/ServerFunc.cpp">
+			<Option target="BankingAppServer"/>
+		</Unit>
+		<Unit filename="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/Sockets/CreateServer/ServerFunc.h">
+			<Option target="BankingAppServer"/>
+		</Unit>
 		<Unit filename="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/client/client.cpp">
 			<Option target="BankingAppClient"/>
 		</Unit>

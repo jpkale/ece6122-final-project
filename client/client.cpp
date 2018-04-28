@@ -1,5 +1,5 @@
 #include <thread>
-
+#include "../Sockets/CreateClient/ClientFunc.h";
 #include "ui/landing.h"
 #include "ui/home.h"
 #include "ui/page.h"
@@ -117,6 +117,7 @@ void handle_create_account(LandingPage* lp, Credential* cred) {
 }
 
 int main(int argc, char* argv[]) {
+    int socketID = clientcreator(argv[2],argv[1]);
     LandingPage* lp = new LandingPage();
     LandingResult* lr = lp->wait_for_result();
 
