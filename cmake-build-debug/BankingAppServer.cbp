@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="BankingAppServer"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="clang"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="BankingAppServer">
+				<Option output="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/BankingAppServer" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 BankingAppServer"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="BankingAppServer/fast">
+				<Option output="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/BankingAppServer" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 BankingAppServer/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="BankingAppClient">
+				<Option output="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/BankingAppClient" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 BankingAppClient"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="BankingAppClient/fast">
+				<Option output="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/BankingAppClient" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 BankingAppClient/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/NickDargi/Dropbox/Georgia\ Tech/Spring\ 2018/Advanced\ Programming\ Techniques/Final/Final_Project/ece6122-final-project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/client/client.cpp">
+			<Option target="BankingAppClient"/>
+		</Unit>
+		<Unit filename="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/client/ui/home.cpp">
+			<Option target="BankingAppClient"/>
+		</Unit>
+		<Unit filename="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/client/ui/home.h">
+			<Option target="BankingAppClient"/>
+		</Unit>
+		<Unit filename="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/client/ui/landing.cpp">
+			<Option target="BankingAppClient"/>
+		</Unit>
+		<Unit filename="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/client/ui/landing.h">
+			<Option target="BankingAppClient"/>
+		</Unit>
+		<Unit filename="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/client/ui/page.cpp">
+			<Option target="BankingAppClient"/>
+		</Unit>
+		<Unit filename="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/client/ui/page.h">
+			<Option target="BankingAppClient"/>
+		</Unit>
+		<Unit filename="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/server/server.cpp">
+			<Option target="BankingAppServer"/>
+		</Unit>
+		<Unit filename="/Users/NickDargi/Dropbox/Georgia Tech/Spring 2018/Advanced Programming Techniques/Final/Final_Project/ece6122-final-project/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
