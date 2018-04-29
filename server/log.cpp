@@ -118,6 +118,12 @@ string log::getPassword(string user, string password)
   return d2;
 }
 
+
+/*******************************************************************
+ * Creates new file of log with all data decrypted
+ * Variables to take in: user - to grab the file by user name
+ *                       password - to decrypt information from file
+ *******************************************************************/
 void log::openLog(string user, string password){
     string line, part1, part2, d1, d2;
     string name, newFile;
