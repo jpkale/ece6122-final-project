@@ -25,7 +25,7 @@ int main() {
             log::createFile(userNam,password);
             break;
         case 2: //checking your balance
-            passCheck = log::getPassword(userNam);
+            passCheck = log::getPassword(userNam, password);
             if(passCheck == password) {
                 balance = log::getBalance(userNam, password);
                 cout << "Balance = " << balance << endl;
@@ -35,7 +35,7 @@ int main() {
             }
             break;
         case 3:  //Adding money to account
-            passCheck = log::getPassword(userNam);
+            passCheck = log::getPassword(userNam, password);
             if(passCheck == password) {
                 cout << "Money to add:" << endl;
                 cin >> Uservalue;
@@ -48,7 +48,7 @@ int main() {
             }
             break;
         case 4:  //Taking money from account
-            passCheck = log::getPassword(userNam);
+            passCheck = log::getPassword(userNam, password);
             if(passCheck == password) {
                 cout << "Money to withdraw:" << endl;
                 cin >> Uservalue;
@@ -61,7 +61,7 @@ int main() {
             }
             break;
         case 5:  //checking to see if I can get the password out from file
-            passCheck = log::getPassword(userNam);
+            passCheck = log::getPassword(userNam, password);
             if(passCheck == password){
                 cout << "Correct" << endl;
             }

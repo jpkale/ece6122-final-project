@@ -26,7 +26,7 @@ void log::createFile(string user, string password){
   name.append(user);
   name.append(".cvs");
   person.open(name, ios::app);
-  person << "Password: " << password << endl;
+  person << encryption::encrypt("Password: ", password) << " " << encryption::encrypt(password, password) << endl;
   person << encryption::encrypt("Balance: ", password) << " " << encryption::encrypt(to_string(balance), password) << endl;
   person.close();
 }
@@ -100,20 +100,22 @@ int log::getBalance(string user, string password)
  * Sends the password to the server (can be used for verification)
  * Variables to take in: user - to grab the file by user name
  **************************************************************************/
-string log::getPassword(string user)
+string log::getPassword(string user, string password)
 {
-  string name, part1, part2;
+  string name, part1, part2, d1, d2;
   name.append(user);
   name.append(".cvs");
   data.open(name);
   if(data.is_open()){     //checks to make sure file is open
     data >> part1 >> part2;
+    d1 = encryption::decrypt(part1, password);
+    d2 = encryption::decrypt(part2, password);
   }
   else {
     cout << "Unable to open file" << endl;
   }
   data.close();
-  return part2;
+  return d2;
 }
 
 
