@@ -64,3 +64,28 @@ double returnbalance(char* input)
     balance = std::stod(placeholder);
     return balance;
 }
+double serverreturnamount(char* input)
+{
+    double balance;
+    int j = 0;
+    std::string placeholder;
+    for(int i = 2;i<256;i++)
+    {
+        if(input[i] == 44)
+        {
+            j++;
+            if(j == 3)
+            {
+                break;
+            }
+        }
+        else
+        {
+            if (j == 2) {
+                placeholder.push_back(input[i]);
+            }
+        }
+    }
+    balance = std::stod(placeholder);
+    return balance;
+}

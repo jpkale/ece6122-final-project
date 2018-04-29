@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
     int socketID, n;
     bool was_successful;
     double balance;
+    double amount;
     char buffer[256];
     int b = 1;
     socketID = servercreator(argv[1]);
@@ -36,7 +37,8 @@ int main(int argc, char *argv[]) {
                     n = write(socketID,"0",1);//Will Send False if unsuccessful
                 }
             case 2: printf("Deposit");
-                //Attempt to Perform Deposit here and set boolean was_successful, set balance to accounts balance
+                //Attempt to Perform Deposit of amount here and set boolean was_successful, set balance to accounts balance
+                amount = serverreturnamount(buffer);
                 if (was_successful)
                 {
                     strs << balance;
@@ -53,6 +55,7 @@ int main(int argc, char *argv[]) {
                 }
             case 3: printf("Withdrawl");
                 //Attempt to Perform Withdrawl here and set boolean was_successful, set balance to accounts balance
+                amount = serverreturnamount(buffer);
                 if (was_successful)
                 {
                     strs << balance;
