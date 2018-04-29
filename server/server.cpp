@@ -21,11 +21,12 @@ int main(int argc, char *argv[]) {
         bzero(buffer,256);
         n = read(socketID,buffer,255);
         int process = determineprocess(buffer);
+        std::ostringstream strs;
         switch(process)
         {
-            std::ostringstream strs;
+
             case 1: printf("Create Account");
-                was_successful = determinesuccess(buffer);
+                //Attempt to create account and set the value of was_successful.
                 if (was_successful)
                 {
                     n = write(socketID,"1",1);//Will Send True if successful
@@ -35,7 +36,7 @@ int main(int argc, char *argv[]) {
                     n = write(socketID,"0",1);//Will Send False if unsuccessful
                 }
             case 2: printf("Deposit");
-                was_successful = determinesuccess(buffer);
+                //Attempt to Perform Deposit here and set boolean was_successful, set balance to accounts balance
                 if (was_successful)
                 {
                     strs << balance;
@@ -51,7 +52,7 @@ int main(int argc, char *argv[]) {
                     n = write(socketID,"0",1);//Will Send False if unsuccessful followed by balance
                 }
             case 3: printf("Withdrawl");
-                was_successful = determinesuccess(buffer);
+                //Attempt to Perform Withdrawl here and set boolean was_successful, set balance to accounts balance
                 if (was_successful)
                 {
                     strs << balance;
@@ -67,7 +68,7 @@ int main(int argc, char *argv[]) {
                     n = write(socketID,buffer,strlen(buffer));///Will Send False if unsuccessful followed by balance
                 }
             case 4: printf("Login to Account");
-                was_successful = determinesuccess(buffer);
+                //Attempt to Perform Login here and set boolean was_successful, set balance to accounts balance
                 if (was_successful)
                 {
                     strs << balance;
