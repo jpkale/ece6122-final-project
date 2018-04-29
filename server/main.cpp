@@ -10,7 +10,7 @@ int main() {
     string userNam , Dline, password, passCheck;
     int option, balance, newbalance, Uservalue;
 
-    cout << "1) New user 2) Check Balance (Read Data)  3) Add money (Write Data) 4) Withdraw money 5) Check Password" << endl;
+    cout << "1) New user 2) Check Balance (Read Data)  3) Add money (Write Data) 4) Withdraw money 5) Check Password 6) Open Log" << endl;
     cin >> option;
 
     cout << "Name:" << endl;
@@ -68,6 +68,9 @@ int main() {
             else{
                 cout << "Incorrect" << endl;
             }
+            break;
+        case 6:
+            log::openLog(userNam, password);
             break;
         default:
             cout << "Did not choose an option" << endl;

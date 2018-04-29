@@ -118,4 +118,24 @@ string log::getPassword(string user, string password)
   return d2;
 }
 
+void log::openLog(string user, string password){
+    string line, part1, part2, d1, d2;
+    string name, newFile;
+    name.append(user);
+    name.append(".cvs");
+    data.open(name);
 
+    newFile.append(user);
+    newFile.append("_decrypted.cvs");
+    person.open(newFile, ios::trunc);
+
+    while (data){
+        data >> part1 >> part2;
+        d1 = encryption::decrypt(part1, password);
+        d2 = encryption::decrypt(part2, password);
+        if(data){person << d1 << d2 << endl;}
+    }
+
+    data.close();
+    person.close();
+}
