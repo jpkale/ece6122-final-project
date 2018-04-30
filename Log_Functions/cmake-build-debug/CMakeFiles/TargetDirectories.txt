@@ -1,3 +1,0 @@
-C:/Users/212410438/CLionProjects/Log_Functions/cmake-build-debug/CMakeFiles/final_test.dir
-C:/Users/212410438/CLionProjects/Log_Functions/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/212410438/CLionProjects/Log_Functions/cmake-build-debug/CMakeFiles/rebuild_cache.dir
