@@ -3,7 +3,7 @@
 
 #include <curses.h>
 #include <string.h>
-#include <cstdlib>
+#include <stdlib.h>
 
 using namespace ui;
 

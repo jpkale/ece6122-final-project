@@ -1,6 +1,6 @@
 #include <curses.h>
 #include <form.h>
-#include <cstdlib>
+#include <stdlib.h>
 
 #include "home.h"
 
