@@ -1,5 +1,14 @@
-#include <thread>
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include "../Sockets/CreateClient/ClientFunc.h"
+#include "../Sockets/Serialization/Serialize.h"
 #include "ui/landing.h"
 #include "ui/home.h"
 #include "ui/page.h"
@@ -9,7 +18,8 @@ using namespace std;
 
 using namespace ui;
 using namespace std;
-
+int socketID;
+char buffer[256];
 struct LoginResult {
     double balance;
     bool was_successful;
@@ -17,7 +27,11 @@ struct LoginResult {
     LoginResult(double balance, bool was_successful) :
         balance(balance), was_successful(was_successful) {};
 };
-
+void error(const char *msg)
+{
+    perror(msg);
+    exit(0);
+}
 /*
  * Given a credential, log into the server.  Return the a LoginResult with the
  * account balance and was_successful=true if login was successful, and
@@ -25,8 +39,23 @@ struct LoginResult {
  * ignored in this case).
  */
 LoginResult login(Credential* cred) {
-    // TODO: Implement
-    return LoginResult(0, false);
+    int classifier;
+    bool was_successful;
+    bzero(buffer,256);
+    std::string serializeddata = serializecredentiallogin(cred);
+    strcpy(buffer,serializeddata.c_str());
+    classifier = write(socketID,buffer,strlen(buffer));
+    if (classifier < 0) {
+        error("ERROR with connection to Server");
+    }
+    bzero(buffer,256);
+    classifier = read(socketID,buffer,255);
+    if (classifier < 0) {
+        error("ERROR with connection to Server");
+    }
+    was_successful = determinesuccess(buffer);
+    double balance = returnbalance(buffer);
+    return LoginResult(balance, was_successful);
 }
 
 /*
@@ -35,8 +64,22 @@ LoginResult login(Credential* cred) {
  * false if unsuccessful.
  */
 bool create_account(Credential* cred) {
-    // TODO: Implement
-    return false;
+    int classifier;
+    bool was_successful;
+    bzero(buffer,256);
+    std::string serializeddata = serializecredentialcreate(cred);
+    strcpy(buffer,serializeddata.c_str());
+    classifier = write(socketID,buffer,strlen(buffer));
+    if (classifier < 0) {
+        error("ERROR with connection to Server");
+    }
+    bzero(buffer,256);
+    classifier = read(socketID,buffer,255);
+    if (classifier < 0) {
+        error("ERROR with connection to Server");
+    }
+    was_successful = determinesuccess(buffer);
+    return was_successful;
 }
 
 struct TransactionResult {
@@ -54,8 +97,23 @@ struct TransactionResult {
  * not the transaction was successful.
  */
 TransactionResult deposit(Credential* cred, double amount) {
-    // TODO: Implement
-    return TransactionResult(0, false);
+    int classifier;
+    bool was_successful;
+    bzero(buffer,256);
+    std::string serializeddata = serializedeposit(cred,amount);
+    strcpy(buffer,serializeddata.c_str());
+    classifier = write(socketID,buffer,strlen(buffer));
+    if (classifier < 0) {
+        error("ERROR with connection to Server");
+    }
+    bzero(buffer,256);
+    classifier = read(socketID,buffer,255);
+    if (classifier < 0) {
+        error("ERROR with connection to Server");
+    }
+    was_successful = determinesuccess(buffer);
+    double balance = returnbalance(buffer);
+    return TransactionResult(was_successful, balance);
 }
 
 /*
@@ -65,8 +123,23 @@ TransactionResult deposit(Credential* cred, double amount) {
  * transaction was succesful. 
  */
 TransactionResult withdrawal(Credential* cred, double amount) {
-    // TODO: Implement
-    return TransactionResult(0, false);
+    int classifier;
+    bool was_successful;
+    bzero(buffer,256);
+    std::string serializeddata = serializewithdrawl(cred,amount);
+    strcpy(buffer,serializeddata.c_str());
+    classifier = write(socketID,buffer,strlen(buffer));
+    if (classifier < 0) {
+        error("ERROR with connection to Server");
+    }
+    bzero(buffer,256);
+    classifier = read(socketID,buffer,255);
+    if (classifier < 0) {
+        error("ERROR with connection to Server");
+    }
+    was_successful = determinesuccess(buffer);
+    double balance = returnbalance(buffer);
+    return TransactionResult(was_successful, balance);
 }
 
 void handle_login(LandingPage* lp, Credential* cred) {
@@ -117,6 +190,7 @@ void handle_create_account(LandingPage* lp, Credential* cred) {
 }
 
 int main(int argc, char* argv[]) {
+    socketID = clientcreator(argv[2],argv[1]);
     LandingPage* lp = new LandingPage();
     LandingResult* lr = lp->wait_for_result();
 
