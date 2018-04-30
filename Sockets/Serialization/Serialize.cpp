@@ -89,3 +89,49 @@ double serverreturnamount(char* input)
     balance = std::stod(placeholder);
     return balance;
 }
+std::string serverreturnusername(char* input)
+{
+    double balance;
+    int j = 0;
+    std::string placeholder;
+    for(int i = 2;i<256;i++)
+    {
+        if(input[i] == 44)
+        {
+            j++;
+            if(j == 1)
+            {
+                break;
+            }
+        }
+        else
+        {
+                placeholder.push_back(input[i]);
+        }
+    }
+    return placeholder;
+}
+std::string serverreturnpassword(char* input)
+{
+    double balance;
+    int j = 0;
+    std::string placeholder;
+    for(int i = 2;i<256;i++)
+    {
+        if(input[i] == 44)
+        {
+            j++;
+            if(j == 2)
+            {
+                break;
+            }
+        }
+        else
+        {
+            if (j == 1) {
+                placeholder.push_back(input[i]);
+            }
+        }
+    }
+    return placeholder;
+}
