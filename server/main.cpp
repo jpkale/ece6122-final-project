@@ -6,11 +6,13 @@
 
 using namespace std;
 
+
 int main() {
     string userNam , Dline, password, passCheck;
-    int option, balance, newbalance, Uservalue;
+    int option;
+    float balance, newbalance, Uservalue;
 
-    cout << "1) New user 2) Check Balance (Read Data)  3) Add money (Write Data) 4) Withdraw money 5) Check Password 6) Open Log" << endl;
+    cout << "1) New user 2) Check Balance 3) Add money 4) Withdraw money 5) Check Password 6) Open Log" << endl;
     cin >> option;
 
     cout << "Name:" << endl;
@@ -41,7 +43,7 @@ int main() {
                 cin >> Uservalue;
                 balance = log::getBalance(userNam, password);
                 newbalance = balance + Uservalue;
-                log::write(userNam, password, newbalance, Uservalue, 1);
+                log::writeFile(userNam, password, newbalance, Uservalue, 1);
             }
             else{
                 cout << "Incorrect username or password" << endl;
@@ -54,7 +56,7 @@ int main() {
                 cin >> Uservalue;
                 balance = log::getBalance(userNam, password);
                 newbalance = balance - Uservalue;
-                log::write(userNam, password, newbalance, Uservalue, 2);
+                log::writeFile(userNam, password, newbalance, Uservalue, 2);
             }
             else{
                 cout << "Incorrect username or password" << endl;
@@ -69,8 +71,14 @@ int main() {
                 cout << "Incorrect" << endl;
             }
             break;
-        case 6:
-            log::openLog(userNam, password);
+        case 6:  //creating new decrypted log file
+            passCheck = log::getPassword(userNam, password);
+            if(passCheck == password) {
+                log::openLog(userNam, password);
+            }
+            else{
+                cout << "Incorrect username or password" << endl;
+            }
             break;
         default:
             cout << "Did not choose an option" << endl;

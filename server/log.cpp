@@ -1,4 +1,4 @@
-// All the functions for logging the data
+// This module encrypts data using a key
 // Created by Rimza Afzal.
 
 
@@ -7,6 +7,7 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include "math.h"
 #include <string>
 
 using namespace std;
@@ -22,7 +23,7 @@ ifstream data;     //reading from
  **************************************************************************************/
 void log::createFile(string user, string password){
   string name;
-  int balance = 0;
+  float balance = 0.00;
   name.append(user);
   name.append(".cvs");
   person.open(name, ios::app);
@@ -39,13 +40,13 @@ void log::createFile(string user, string password){
  *                       amount - the user ammount that was withdrawn/deposited
  *                       flag - 1: deposit 2: withdrawal
  ********************************************************************************/
-void log::write(string user, string password, int balance, int amount, int flag){
+void log::writeFile(string user, string password, float balance, float amount, int flag){
   string name;
   name.append(user);
   name.append(".cvs");
   person.open(name, ios::app);
   switch(flag) {
-    case 1:  //money is being deposited
+    case DEPOSIT:  //money is being deposited
       if (person.is_open()) {       //checks to make sure file is open
         person << encryption::encrypt("User deposited: ", password) << " " << encryption::encrypt(to_string(amount),password) << endl;
         person << encryption::encrypt("Balance: " , password)<< " " << encryption::encrypt(to_string(balance),password) << endl;
@@ -54,7 +55,7 @@ void log::write(string user, string password, int balance, int amount, int flag)
       }
           person.close();
           break;
-    case 2:  //money is being withdrawn
+    case WITHDRAW:  //money is being withdrawn
       if (person.is_open()) {       //checks to make sure file is open
         person << encryption::encrypt("User withdrew: ", password) << " " << encryption::encrypt(to_string(amount),password) << endl;
         person << encryption::encrypt("Balance: " , password) << " " << encryption::encrypt(to_string(balance),password) << endl;
@@ -74,11 +75,11 @@ void log::write(string user, string password, int balance, int amount, int flag)
  * Variables to take in: user - to grab the file by user name
  *                       password - to decrypt information from file
  *******************************************************************/
-int log::getBalance(string user, string password)
+float log::getBalance(string user, string password)
 {
   string line, part1, part2, d1, d2;
   string name;
-  int part = 5;
+  float part = 5;
   name.append(user);
   name.append(".cvs");
   data.open(name);
@@ -87,7 +88,7 @@ int log::getBalance(string user, string password)
       data >> part1 >> part2;
       d1 = encryption::decrypt(part1, password);
       d2 = encryption::decrypt(part2, password);
-      part = stoi(d2);
+      part = stof(d2);
   }
   else {
     cout << "Unable to open file";
