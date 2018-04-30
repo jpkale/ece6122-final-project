@@ -1,4 +1,4 @@
-// This module encrypts data using a key
+// All the functions for logging the data
 // Created by Rimza Afzal.
 
 
