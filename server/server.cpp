@@ -17,6 +17,8 @@ int main(int argc, char *argv[]) {
     char buffer[256];
     int b = 1;
     socketID = servercreator(argv[1]);
+    std::string username;
+    std::string password;
     while(b)
     {
         bzero(buffer,256);
@@ -28,6 +30,8 @@ int main(int argc, char *argv[]) {
 
             case 1: printf("Create Account");
                 //Attempt to create account and set the value of was_successful.
+                username = serverreturnusername(buffer);
+                password = serverreturnpassword(buffer);
                 if (was_successful)
                 {
                     n = write(socketID,"1",1);//Will Send True if successful
@@ -38,6 +42,8 @@ int main(int argc, char *argv[]) {
                 }
             case 2: printf("Deposit");
                 //Attempt to Perform Deposit of amount here and set boolean was_successful, set balance to accounts balance
+                username = serverreturnusername(buffer);
+                password = serverreturnpassword(buffer);
                 amount = serverreturnamount(buffer);
                 if (was_successful)
                 {
@@ -55,6 +61,8 @@ int main(int argc, char *argv[]) {
                 }
             case 3: printf("Withdrawl");
                 //Attempt to Perform Withdrawl here and set boolean was_successful, set balance to accounts balance
+                username = serverreturnusername(buffer);
+                password = serverreturnpassword(buffer);
                 amount = serverreturnamount(buffer);
                 if (was_successful)
                 {
@@ -72,6 +80,8 @@ int main(int argc, char *argv[]) {
                 }
             case 4: printf("Login to Account");
                 //Attempt to Perform Login here and set boolean was_successful, set balance to accounts balance
+                username = serverreturnusername(buffer);
+                password = serverreturnpassword(buffer);
                 if (was_successful)
                 {
                     strs << balance;

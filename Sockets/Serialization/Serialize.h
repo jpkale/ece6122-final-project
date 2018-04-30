@@ -14,4 +14,6 @@ std::string serializecredentiallogin(ui::Credential* cred);
 bool determinesuccess(char* input);
 double returnbalance(char* input);
 double serverreturnamount(char* input);
+std::string serverreturnpassword(char* input);
+std::string serverreturnusername(char* input);
 #endif //BANKINGAPPSERVER_SERIALIZE_H
