@@ -88,7 +88,7 @@ int main(int argc, char *argv[]) {
 
                 if (was_successful) {
                     double newamount = log::getBalance(username, password) - amount;
-                    log::writeFile(username, password, newamount, amount, 1);
+                    log::writeFile(username, password, newamount, amount, 2);
                     balance = log::getBalance(username, password);
                     strs << balance;
                     std::string sendstring = "1," + strs.str() + ",";
