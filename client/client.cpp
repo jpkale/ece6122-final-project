@@ -146,7 +146,9 @@ void handle_login(LandingPage* lp, Credential* cred) {
     TransactionResult res;
 
     if (login_r.was_successful) {
-        lp->popup("Welcome %s!\nYour balance is %.2lf\n", cred->username, login_r.balance);
+        lp->popup("Welcome %s!\nYour balance is %.2lf\n",
+                cred->username.c_str(),
+                login_r.balance);
         
         while (true) {
             HomePage* hp = new HomePage();
@@ -177,15 +179,17 @@ void handle_login(LandingPage* lp, Credential* cred) {
         }
     }
     else
-        lp->popup("Failed logging in with '%s'.\n", cred->username);
+        lp->popup("Failed logging in with '%s'.\n", cred->username.c_str());
 }
 
 void handle_create_account(LandingPage* lp, Credential* cred) {
     bool create_r = create_account(cred);
     if (create_r)
-        lp->popup("Welcome %s!\nPlease continue and login.", cred->username);
+        lp->popup("Welcome %s!\nPlease continue and login.",
+                cred->username.c_str());
     else
-        lp->popup("Sorry, '%s' is already taken.\nTry another username.\n", cred->username);
+        lp->popup("Sorry, '%s' is already taken.\nTry another username.\n",
+                cred->username.c_str());
 }
 
 int main(int argc, char* argv[]) {

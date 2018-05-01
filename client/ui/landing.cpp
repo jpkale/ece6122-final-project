@@ -4,6 +4,7 @@
 #include <curses.h>
 #include <string.h>
 #include <stdlib.h>
+#include <regex>
 
 using namespace ui;
 
@@ -104,16 +105,13 @@ LandingResult* LandingPage::wait_for_result() {
     Credential *cred = new Credential();
     ITEM** items = menu_items(this->create_login_menu);
     unsigned int* count;
-    char* buf;
 
     while (true) {
         int c = wgetch(this->create_login_window);
         if (vertical_level == USERNAME_FIELD) {
             count = &uname_char_count;
-            buf = const_cast<char*>(cred->username.c_str());
         } else {
             count = &pword_char_count;
-            buf = const_cast<char*>(cred->password.c_str());
         }
 
         switch (c) {
@@ -135,7 +133,6 @@ LandingResult* LandingPage::wait_for_result() {
             case KEY_BACKSPACE: case KEY_DC: case KEY_DEL:
                 if (*count != 0) {
                     form_driver(this->credential_form, REQ_DEL_PREV);
-                    buf[*count] = '\0';
                     (*count)--;
                 }
                 break;
@@ -146,6 +143,14 @@ LandingResult* LandingPage::wait_for_result() {
                 this->handle_exit();
                 break;
             case KEY_ENTER: case '\n':
+                cred->username = regex_replace(
+                        string(field_buffer(this->credential_form_fields[1], 0)),
+                        regex(" +$"),
+                        "");
+                cred->password = regex_replace(
+                        string(field_buffer(this->credential_form_fields[3], 0)),
+                        regex(" +$"),
+                        "");
                 if (current_item(this->create_login_menu) == items[0])
                     return new LandingResult(cred, CREATE);
                 else
@@ -153,7 +158,6 @@ LandingResult* LandingPage::wait_for_result() {
                 break;
             default:
                 if (32 < c && c < 127 && *count < TEXT_LENGTH - 1) {
-                    buf[*count] = c;
                     if (vertical_level == USERNAME_FIELD)
                         form_driver(this->credential_form, c);
                     else
@@ -167,16 +171,12 @@ LandingResult* LandingPage::wait_for_result() {
 }
 
 Credential::Credential() {
-    this->username = (char*) malloc(TEXT_LENGTH);
-    this->password = (char*) malloc(TEXT_LENGTH);
-    // memset(this->username, '\0', TEXT_LENGTH);
-    // memset(this->password, '\0', TEXT_LENGTH);
+    this->username = string('\0', TEXT_LENGTH);
+    this->password = string('\0', TEXT_LENGTH);
+
 }
 
-Credential::~Credential() {
-    // free(this->username);
-    // free(this->password); 
-}
+Credential::~Credential() {}
 
 LandingResult::LandingResult(Credential* cred, LandingSubmitType type) {
     this->cred = cred;
