@@ -28,6 +28,7 @@ if (!Curses_FOUND)
     elseif (UNIX)
         message(FATAL_ERROR "Install with 'apt install ncurses-base'")
     endif(WIN32)
+    message(FATAL_ERROR "Can't determine how to install ncurses on your system")
 endif(!Curses_FOUND)
 
 set (ADDITIONAL_LIBRARIES menu form)
