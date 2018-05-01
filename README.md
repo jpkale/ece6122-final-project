@@ -26,5 +26,5 @@ following instructions:
 - `brew install ncurses`
 
 ### Windows
-- First, install\Cygwin via their [instructions](https://www.cygwin.com/)
+- First, install Cygwin via their [instructions](https://www.cygwin.com/)
 - When going through the package install, `libncurses-devel` and `ncurses`
