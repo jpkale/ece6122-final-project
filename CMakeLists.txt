@@ -19,7 +19,7 @@ add_executable (BankingAppServer ${SERVER_MAIN} ${SERVER_HEADERS} ${SERVER_SOURC
 # Curses
 find_package (Curses QUIET)
 
-if (!Curses_FOUND)
+if (Curses_NOTFOUND)
     message(SEND_ERROR "Curses was not found!")
     if (WIN32)
         message(FATAL_ERROR "Install ncurses in cygwin and run from cygwin terminal")
@@ -29,7 +29,7 @@ if (!Curses_FOUND)
         message(FATAL_ERROR "Install with 'apt install ncurses-base'")
     endif(WIN32)
     message(FATAL_ERROR "Can't determine how to install ncurses on your system")
-endif(!Curses_FOUND)
+endif(!Curses_NOTFOUND)
 
 set (ADDITIONAL_LIBRARIES menu form)
 include_directories (${CURSES_INCLUDE_DIR})
