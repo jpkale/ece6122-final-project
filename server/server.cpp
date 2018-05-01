@@ -1,4 +1,4 @@
-
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,6 +10,11 @@
 #include "../Sockets/Serialization/Serialize.h"
 #include <sstream>
 int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        cout << "Usage: ./BankingAppClient [PORT]" << endl;
+        exit(-1);
+    }
+
     int socketID, n;
     bool was_successful;
     double balance;
@@ -19,6 +24,7 @@ int main(int argc, char *argv[]) {
     socketID = servercreator(argv[1]);
     std::string username;
     std::string password;
+
     while(b)
     {
         bzero(buffer,256);

@@ -7,6 +7,7 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <netinet/in.h>
+#include <iostream>
 #include "../Sockets/CreateClient/ClientFunc.h"
 #include "../Sockets/Serialization/Serialize.h"
 #include "ui/landing.h"
@@ -15,6 +16,7 @@
 
 using namespace ui;
 using namespace std;
+
 int socketID;
 char buffer[256];
 struct LoginResult {
@@ -187,6 +189,11 @@ void handle_create_account(LandingPage* lp, Credential* cred) {
 }
 
 int main(int argc, char* argv[]) {
+
+    if (argc != 3) {
+        cout << "Usage: ./BankingAppClient [SERVER-HOST] [SERVER-PORT]" << endl;
+        exit(-1);
+    }
     socketID = clientcreator(argv[2],argv[1]);
     LandingPage* lp = new LandingPage();
     LandingResult* lr = lp->wait_for_result();
