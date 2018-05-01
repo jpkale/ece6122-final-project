@@ -113,6 +113,7 @@ int main(int argc, char *argv[]) {
                     was_successful = true;
                 }
                 if (was_successful) {
+                    log::openLog(userNam, password);
                     balance = log::getBalance(username, password);
                     strs << balance;
                     std::string sendstring = "1," + strs.str() + ",";
