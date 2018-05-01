@@ -17,7 +17,19 @@ add_executable (BankingAppServer ${SERVER_MAIN} ${SERVER_HEADERS} ${SERVER_SOURC
 # Dependencies
 
 # Curses
-find_package (Curses REQUIRED)
+find_package (Curses QUIET)
+
+if (!Curses_FOUND)
+    message(SEND_ERROR "Curses was not found!")
+    if (WIN32)
+        message(FATAL_ERROR "Install ncurses in cygwin and run from cygwin terminal")
+    elseif (APPLE)
+        message(FATAL_ERROR "Install with 'brew install ncurses'")
+    elseif (UNIX)
+        message(FATAL_ERROR "Install with 'apt install ncurses-base'")
+    endif(WIN32)
+endif(!Curses_FOUND)
+
 set (ADDITIONAL_LIBRARIES menu form)
 include_directories (${CURSES_INCLUDE_DIR})
 target_link_libraries (BankingAppClient ${CURSES_LIBRARIES} ${ADDITIONAL_LIBRARIES})
