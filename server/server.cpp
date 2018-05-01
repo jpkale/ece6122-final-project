@@ -9,6 +9,7 @@
 #include "../Sockets/CreateServer/ServerFunc.h"
 #include "../Sockets/Serialization/Serialize.h"
 #include <sstream>
+#include "../server/log.h"
 int main(int argc, char *argv[]) {
     if (argc != 2) {
         cout << "Usage: ./BankingAppClient [PORT]" << endl;
@@ -16,9 +17,10 @@ int main(int argc, char *argv[]) {
     }
 
     int socketID, n;
-    bool was_successful;
+    bool was_successful = false;
     double balance;
     double amount;
+    std::string passCheck;
     char buffer[256];
     int b = 1;
     socketID = servercreator(argv[1]);
@@ -34,71 +36,92 @@ int main(int argc, char *argv[]) {
         switch(process)
         {
 
-            case 1: printf("Create Account");
+            case 1: {
+                printf("Create Account");
                 //Attempt to create account and set the value of was_successful.
                 username = serverreturnusername(buffer);
                 password = serverreturnpassword(buffer);
-                if (was_successful)
-                {
-                    n = write(socketID,"1",1);//Will Send True if successful
+                log::createFile(username, password);
+                if (was_successful) {
+                    n = write(socketID, "1", 1);//Will Send True if successful
+                } else {
+                    n = write(socketID, "0", 1);//Will Send False if unsuccessful
                 }
-                else
-                {
-                    n = write(socketID,"0",1);//Will Send False if unsuccessful
-                }
-            case 2: printf("Deposit");
+            }
+            case 2: {
+                printf("Deposit");
                 //Attempt to Perform Deposit of amount here and set boolean was_successful, set balance to accounts balance
                 username = serverreturnusername(buffer);
                 password = serverreturnpassword(buffer);
+                passCheck = log::getPassword(username, password);
                 amount = serverreturnamount(buffer);
-                if (was_successful)
-                {
+                if (passCheck == password) {
+                    was_successful = true;
+                }
+                if (was_successful) {
+                    double newamount = log::getBalance(username, password) + amount;
+                    log::writeFile(username, password, newamount, amount, 1);
+                    balance = log::getBalance(username, password);
                     strs << balance;
                     std::string sendstring = "1," + strs.str() + ",";
-                    strcpy(buffer,sendstring.c_str());
-                    n = write(socketID,buffer,strlen(buffer));//Will Send True if successful followed by balance
-                }
-                else
-                {
+                    strcpy(buffer, sendstring.c_str());
+                    n = write(socketID, buffer, strlen(buffer));//Will Send True if successful followed by balance
+                } else {
                     strs << balance;
                     std::string sendstring = "0," + strs.str() + ",";
-                    strcpy(buffer,sendstring.c_str());
-                    n = write(socketID,"0",1);//Will Send False if unsuccessful followed by balance
+                    strcpy(buffer, sendstring.c_str());
+                    n = write(socketID, "0", 1);//Will Send False if unsuccessful followed by balance
                 }
-            case 3: printf("Withdrawl");
+            }
+            case 3: {
+                printf("Withdrawl");
+
                 //Attempt to Perform Withdrawl here and set boolean was_successful, set balance to accounts balance
                 username = serverreturnusername(buffer);
                 password = serverreturnpassword(buffer);
+                passCheck = log::getPassword(username, password);
                 amount = serverreturnamount(buffer);
-                if (was_successful)
-                {
+                double oldbalance = log::getBalance(username, password);
+                if (passCheck == password && (oldbalance >= amount)) {
+                    was_successful = true;
+                }
+
+                if (was_successful) {
+                    double newamount = log::getBalance(username, password) - amount;
+                    log::writeFile(username, password, newamount, amount, 1);
+                    balance = log::getBalance(username, password);
                     strs << balance;
                     std::string sendstring = "1," + strs.str() + ",";
-                    strcpy(buffer,sendstring.c_str());
-                    n = write(socketID,buffer,strlen(buffer));///Will Send True if successful followed by balance
-                }
-                else
-                {
+                    strcpy(buffer, sendstring.c_str());
+                    n = write(socketID, buffer, strlen(buffer));///Will Send True if successful followed by balance
+                } else {
                     strs << balance;
                     std::string sendstring = "0," + strs.str() + ",";
-                    strcpy(buffer,sendstring.c_str());
-                    n = write(socketID,buffer,strlen(buffer));///Will Send False if unsuccessful followed by balance
+                    strcpy(buffer, sendstring.c_str());
+                    n = write(socketID, buffer, strlen(buffer));///Will Send False if unsuccessful followed by balance
                 }
-            case 4: printf("Login to Account");
+            }
+            case 4: {
+                printf("Login to Account");
+
                 //Attempt to Perform Login here and set boolean was_successful, set balance to accounts balance
                 username = serverreturnusername(buffer);
                 password = serverreturnpassword(buffer);
-                if (was_successful)
-                {
+                passCheck = log::getPassword(username, password);
+
+                if (passCheck == password) {
+                    was_successful = true;
+                }
+                if (was_successful) {
+                    balance = log::getBalance(username, password);
                     strs << balance;
                     std::string sendstring = "1," + strs.str() + ",";
-                    strcpy(buffer,sendstring.c_str());
-                    n = write(socketID,buffer,strlen(buffer));///Will Send True if successful followed by balance
+                    strcpy(buffer, sendstring.c_str());
+                    n = write(socketID, buffer, strlen(buffer));///Will Send True if successful followed by balance
+                } else {
+                    n = write(socketID, "0", 1);//Will Send False if unsuccessful
                 }
-                else
-                {
-                    n = write(socketID,"0",1);//Will Send False if unsuccessful
-                }
+            }
         }
     }
     return 0;
