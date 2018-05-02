@@ -7,7 +7,6 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include "math.h"
 #include <string>
 
 using namespace std;
@@ -21,15 +20,22 @@ ifstream data;     //reading from
  *                      password - write the password to associate with the user
  * Hard coded: and initial account balance of 0
  **************************************************************************************/
-void log::createFile(string user, string password){
+bool log::createFile(string user, string password){
   string name;
-  double balance = 0.00;
+  float balance = 0.00;
   name.append(user);
   name.append(".cvs");
-  person.open(name, ios::app);
-  person << encryption::encrypt("Password: ", password) << " " << encryption::encrypt(password, password) << endl;
-  person << encryption::encrypt("Balance: ", password) << " " << encryption::encrypt(to_string(balance), password) << endl;
-  person.close();
+  if(ifstream(name)){
+      //cout << "this already exists" << endl;
+      return false;
+  }
+  else{
+      person.open(name, ios::app);
+      person << encryption::encrypt("Password: ", password) << " " << encryption::encrypt(password, password) << endl;
+      person << encryption::encrypt("Balance: ", password) << " " << encryption::encrypt(to_string(balance), password) << endl;
+      person.close();
+      return true;
+  }
 }
 
 /********************************************************************************
