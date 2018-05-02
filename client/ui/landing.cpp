@@ -102,16 +102,23 @@ LandingResult* LandingPage::wait_for_result() {
     VerticalLevel vertical_level = USERNAME_FIELD;
     unsigned int uname_char_count = 0;
     unsigned int pword_char_count = 0;
+    char uname_buf[TEXT_LENGTH];
+    char pword_buf[TEXT_LENGTH];
+    memset(uname_buf, '\0', TEXT_LENGTH);
+    memset(pword_buf, '\0', TEXT_LENGTH);
     Credential *cred = new Credential();
     ITEM** items = menu_items(this->create_login_menu);
     unsigned int* count;
 
     while (true) {
         int c = wgetch(this->create_login_window);
+        char *buf;
         if (vertical_level == USERNAME_FIELD) {
             count = &uname_char_count;
+            buf = uname_buf;
         } else {
             count = &pword_char_count;
+            buf = pword_buf;
         }
 
         switch (c) {
@@ -144,11 +151,11 @@ LandingResult* LandingPage::wait_for_result() {
                 break;
             case KEY_ENTER: case '\n':
                 cred->username = regex_replace(
-                        string(field_buffer(this->credential_form_fields[1], 0)),
+                        string(uname_buf),
                         regex(" +$"),
                         "");
                 cred->password = regex_replace(
-                        string(field_buffer(this->credential_form_fields[3], 0)),
+                        string(uname_buf),
                         regex(" +$"),
                         "");
                 if (current_item(this->create_login_menu) == items[0])
@@ -158,10 +165,14 @@ LandingResult* LandingPage::wait_for_result() {
                 break;
             default:
                 if (32 < c && c < 127 && *count < TEXT_LENGTH - 1) {
-                    if (vertical_level == USERNAME_FIELD)
+                    if (vertical_level == USERNAME_FIELD) {
                         form_driver(this->credential_form, c);
-                    else
+                        buf[*count] = c;
+                    }
+                    else {
                         form_driver(this->credential_form, '*');
+                        buf[*count] = c;
+                    }
                     (*count)++;
                 }
                 break;

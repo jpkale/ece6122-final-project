@@ -12,7 +12,7 @@
 #include "../server/log.h"
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        cout << "Usage: ./BankingAppClient [PORT]" << endl;
+        cout << "Usage: ./BankingAppServer [PORT]" << endl;
         exit(-1);
     }
 
@@ -47,6 +47,7 @@ int main(int argc, char *argv[]) {
                 } else {
                     n = write(socketID, "0", 1);//Will Send False if unsuccessful
                 }
+                break;
             }
             case 2: {
                 printf("Deposit");
@@ -72,6 +73,7 @@ int main(int argc, char *argv[]) {
                     strcpy(buffer, sendstring.c_str());
                     n = write(socketID, "0", 1);//Will Send False if unsuccessful followed by balance
                 }
+                break;
             }
             case 3: {
                 printf("Withdrawl");
@@ -100,6 +102,7 @@ int main(int argc, char *argv[]) {
                     strcpy(buffer, sendstring.c_str());
                     n = write(socketID, buffer, strlen(buffer));///Will Send False if unsuccessful followed by balance
                 }
+                break;
             }
             case 4: {
                 printf("Login to Account");
@@ -122,6 +125,7 @@ int main(int argc, char *argv[]) {
                 } else {
                     n = write(socketID, "0", 1);//Will Send False if unsuccessful
                 }
+                break;
             }
         }
     }
