@@ -41,3 +41,13 @@ void account::linkAccount(double accountNumber, accountHolder a)
 {
     a.addAccount(accountNumber);
 }
+
+double account::checkCredentials(const char *userIDIn, const char *userPasswordIn)
+{
+    double falseAccount = 0;
+    if (userIDIn == userID && userPasswordIn == userPassword)
+    {
+        return accountNumber;
+    }
+    else return falseAccount;
+}

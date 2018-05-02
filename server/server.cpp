@@ -9,6 +9,9 @@
 #include "../Sockets/CreateServer/ServerFunc.h"
 #include "../Sockets/Serialization/Serialize.h"
 #include <sstream>
+#include "account.h"
+#include "accountHolder.h"
+
 int main(int argc, char *argv[]) {
     int socketID, n;
     bool was_successful;
@@ -32,6 +35,7 @@ int main(int argc, char *argv[]) {
                 //Attempt to create account and set the value of was_successful.
                 username = serverreturnusername(buffer);
                 password = serverreturnpassword(buffer);
+                account accountCurr(2039420375, 0, username.c_str(), password.c_str());
                 if (was_successful)
                 {
                     n = write(socketID,"1",1);//Will Send True if successful
@@ -45,6 +49,7 @@ int main(int argc, char *argv[]) {
                 username = serverreturnusername(buffer);
                 password = serverreturnpassword(buffer);
                 amount = serverreturnamount(buffer);
+                accountCurr.deposit(accountCurr.checkCredentials(username.c_str(), password.c_str()),amount);
                 if (was_successful)
                 {
                     strs << balance;
@@ -64,6 +69,7 @@ int main(int argc, char *argv[]) {
                 username = serverreturnusername(buffer);
                 password = serverreturnpassword(buffer);
                 amount = serverreturnamount(buffer);
+                accountCurr.withdrawal(accountCurr.checkCredentials(username.c_str(), password.c_str()),amount);
                 if (was_successful)
                 {
                     strs << balance;
@@ -82,6 +88,7 @@ int main(int argc, char *argv[]) {
                 //Attempt to Perform Login here and set boolean was_successful, set balance to accounts balance
                 username = serverreturnusername(buffer);
                 password = serverreturnpassword(buffer);
+                accountCurr.checkCredentials(username.c_str(), password.c_str());
                 if (was_successful)
                 {
                     strs << balance;

@@ -15,6 +15,7 @@ public:
 
     //member functions
     void linkAccount(double accountNumber, accountHolder a); //associates account number(s) with an account holder
+    double checkCredentials(const char* userIDIn, const char* userPasswordIn);
     void deposit(double accountNumber, double depositAmount);
     void withdrawal(double accountNumber, double withdrawAmount);
 //Data members
