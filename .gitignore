@@ -7,3 +7,4 @@
 *.idea/
 *.cbp
 *cmake-build-*
+*build*
