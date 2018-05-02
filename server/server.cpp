@@ -32,12 +32,14 @@ int main(int argc, char *argv[]) {
         bzero(buffer,256);
         n = read(socketID,buffer,255);
         int process = determineprocess(buffer);
+        was_successful = false;
         std::ostringstream strs;
         switch(process)
         {
 
             case 1: {
                 printf("Create Account");
+                was_successful = false;
                 //Attempt to create account and set the value of was_successful.
                 username = serverreturnusername(buffer);
                 password = serverreturnpassword(buffer);
@@ -56,12 +58,13 @@ int main(int argc, char *argv[]) {
                 password = serverreturnpassword(buffer);
                 passCheck = log::getPassword(username, password);
                 amount = serverreturnamount(buffer);
+                double previousbalance = log::getBalance(username, password);
                 was_successful = false;
                 if (passCheck == password) {
                     was_successful = true;
                 }
                 if (was_successful) {
-                    double newamount = log::getBalance(username, password) + amount;
+                    double newamount = previousbalance + amount;
                     log::writeFile(username, password, newamount, amount, DEPOSIT);
                     balance = log::getBalance(username, password);
                     strs << balance;
