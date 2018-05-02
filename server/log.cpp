@@ -23,7 +23,7 @@ ifstream data;     //reading from
  **************************************************************************************/
 void log::createFile(string user, string password){
   string name;
-  float balance = 0.00;
+  double balance = 0.00;
   name.append(user);
   name.append(".cvs");
   person.open(name, ios::app);
@@ -40,7 +40,7 @@ void log::createFile(string user, string password){
  *                       amount - the user ammount that was withdrawn/deposited
  *                       flag - 1: deposit 2: withdrawal
  ********************************************************************************/
-void log::writeFile(string user, string password, float balance, float amount, int flag){
+void log::writeFile(string user, string password, double balance, double amount, int flag){
   string name;
   name.append(user);
   name.append(".cvs");
@@ -75,11 +75,11 @@ void log::writeFile(string user, string password, float balance, float amount, i
  * Variables to take in: user - to grab the file by user name
  *                       password - to decrypt information from file
  *******************************************************************/
-float log::getBalance(string user, string password)
+double log::getBalance(string user, string password)
 {
   string line, part1, part2, d1, d2;
   string name;
-  float part = 5;
+  double part;
   name.append(user);
   name.append(".cvs");
   data.open(name);
@@ -88,7 +88,7 @@ float log::getBalance(string user, string password)
       data >> part1 >> part2;
       d1 = encryption::decrypt(part1, password);
       d2 = encryption::decrypt(part2, password);
-      part = stof(d2);
+      part = stod(d2);
   }
   else {
     cout << "Unable to open file";
