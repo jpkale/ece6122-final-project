@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
                 //Attempt to create account and set the value of was_successful.
                 username = serverreturnusername(buffer);
                 password = serverreturnpassword(buffer);
-                log::createFile(username, password);
+                was_successful = log::createFile(username, password);
                 if (was_successful) {
                     n = write(socketID, "1", 1);//Will Send True if successful
                 } else {
