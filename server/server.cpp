@@ -55,6 +55,7 @@ int main(int argc, char *argv[]) {
                 password = serverreturnpassword(buffer);
                 passCheck = log::getPassword(username, password);
                 amount = serverreturnamount(buffer);
+                was_successful = false;
                 if (passCheck == password) {
                     was_successful = true;
                 }
@@ -81,6 +82,7 @@ int main(int argc, char *argv[]) {
                 password = serverreturnpassword(buffer);
                 passCheck = log::getPassword(username, password);
                 amount = serverreturnamount(buffer);
+                was_successful = false;
                 double oldbalance = log::getBalance(username, password);
                 if (passCheck == password && (oldbalance >= amount)) {
                     was_successful = true;
@@ -108,7 +110,7 @@ int main(int argc, char *argv[]) {
                 username = serverreturnusername(buffer);
                 password = serverreturnpassword(buffer);
                 passCheck = log::getPassword(username, password);
-
+                was_successful = false;
                 if (passCheck == password) {
                     was_successful = true;
                 }

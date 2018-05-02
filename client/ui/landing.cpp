@@ -171,8 +171,8 @@ LandingResult* LandingPage::wait_for_result() {
 }
 
 Credential::Credential() {
-    this->username = string('\0', TEXT_LENGTH);
-    this->password = string('\0', TEXT_LENGTH);
+    this->username = std::string('\0', TEXT_LENGTH);
+    this->password = std::string('\0', TEXT_LENGTH);
 
 }
 
