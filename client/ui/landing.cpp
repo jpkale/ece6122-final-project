@@ -180,8 +180,12 @@ LandingResult* LandingPage::wait_for_result() {
 }
 
 Credential::Credential() {
-    this->username = std::string('\0', TEXT_LENGTH);
-    this->password = std::string('\0', TEXT_LENGTH);
+    char uname_buf[TEXT_LENGTH];
+    char pword_buf[TEXT_LENGTH];
+    memset(uname_buf, '\0', TEXT_LENGTH);
+    memset(pword_buf, '\0', TEXT_LENGTH);
+    this->username = string(uname_buf);
+    this->password = string(pword_buf);
 
 }
 
