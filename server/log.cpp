@@ -22,11 +22,10 @@ ifstream data;     //reading from
  **************************************************************************************/
 bool log::createFile(string user, string password){
   string name;
-  float balance = 0.00;
+  long balance = 0;
   name.append(user);
   name.append(".cvs");
   if(ifstream(name)){
-      //cout << "this already exists" << endl;
       return false;
   }
   else{
@@ -46,7 +45,7 @@ bool log::createFile(string user, string password){
  *                       amount - the user ammount that was withdrawn/deposited
  *                       flag - 1: deposit 2: withdrawal
  ********************************************************************************/
-void log::writeFile(string user, string password, double balance, double amount, int flag){
+void log::writeFile(string user, string password, long balance, long amount, int flag){
   string name;
   name.append(user);
   name.append(".cvs");
@@ -81,11 +80,11 @@ void log::writeFile(string user, string password, double balance, double amount,
  * Variables to take in: user - to grab the file by user name
  *                       password - to decrypt information from file
  *******************************************************************/
-double log::getBalance(string user, string password)
+long log::getBalance(string user, string password)
 {
   string line, part1, part2, d1, d2;
   string name;
-  double part;
+  long part;
   name.append(user);
   name.append(".cvs");
   data.open(name);

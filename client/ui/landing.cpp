@@ -108,27 +108,24 @@ LandingResult* LandingPage::wait_for_result() {
     memset(pword_buf, '\0', TEXT_LENGTH);
     Credential *cred = new Credential();
     ITEM** items = menu_items(this->create_login_menu);
-    unsigned int* count;
+    unsigned int* count = &uname_char_count;
+    char *buf = uname_buf;
 
     while (true) {
         int c = wgetch(this->create_login_window);
-        char *buf;
-        if (vertical_level == USERNAME_FIELD) {
-            count = &uname_char_count;
-            buf = uname_buf;
-        } else {
-            count = &pword_char_count;
-            buf = pword_buf;
-        }
 
         switch (c) {
             case KEY_STAB: case KEY_CTAB: case '\t':
                 if (vertical_level == USERNAME_FIELD) {
                     form_driver(this->credential_form, REQ_DOWN_FIELD);
                     vertical_level = PASSWORD_FIELD;
+                    count = &pword_char_count;
+                    buf = pword_buf;
                 } else {
                     form_driver(this->credential_form, REQ_UP_FIELD);
                     vertical_level = USERNAME_FIELD;
+                    count = &uname_char_count;
+                    buf = uname_buf;
                 }
                 break;
             case KEY_RIGHT:
@@ -140,6 +137,7 @@ LandingResult* LandingPage::wait_for_result() {
             case KEY_BACKSPACE: case KEY_DC: case KEY_DEL:
                 if (*count != 0) {
                     form_driver(this->credential_form, REQ_DEL_PREV);
+                    buf[*count] = '\0';
                     (*count)--;
                 }
                 break;
@@ -155,7 +153,7 @@ LandingResult* LandingPage::wait_for_result() {
                         regex(" +$"),
                         "");
                 cred->password = regex_replace(
-                        string(uname_buf),
+                        string(pword_buf),
                         regex(" +$"),
                         "");
                 if (current_item(this->create_login_menu) == items[0])

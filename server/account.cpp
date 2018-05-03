@@ -19,7 +19,7 @@ account::account()
     userPassword = " ";
 }
 
-account::account(double accountNumberIn, double balanceIn, const char *userIDIn, const char *userPasswordIn)
+account::account(long accountNumberIn, long balanceIn, const char *userIDIn, const char *userPasswordIn)
 {
     accountNumber = accountNumberIn;
     balance = balanceIn;
@@ -27,17 +27,17 @@ account::account(double accountNumberIn, double balanceIn, const char *userIDIn,
     userPassword = userPasswordIn;
 }
 
-void account::deposit(double accountNumber, double depositAmount)
+void account::deposit(long accountNumber, long depositAmount)
 {
     balance += depositAmount;
 }
 
-void account::withdrawal(double accountNumber, double withdrawAmount)
+void account::withdrawal(long accountNumber, long withdrawAmount)
 {
     balance -= withdrawAmount;
 }
 
-void account::linkAccount(double accountNumber, accountHolder a)
+void account::linkAccount(long accountNumber, accountHolder a)
 {
     a.addAccount(accountNumber);
 }

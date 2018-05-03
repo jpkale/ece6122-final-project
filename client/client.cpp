@@ -20,10 +20,10 @@ using namespace std;
 int socketID;
 char buffer[256];
 struct LoginResult {
-    double balance;
+    long balance;
     bool was_successful;
     LoginResult() : balance(0), was_successful(false) {};
-    LoginResult(double balance, bool was_successful) :
+    LoginResult(long balance, bool was_successful) :
         balance(balance), was_successful(was_successful) {};
 };
 void error(const char *msg)
@@ -53,8 +53,11 @@ LoginResult login(Credential* cred) {
         error("ERROR with connection to Server");
     }
     was_successful = determinesuccess(buffer);
-    double balance = returnbalance(buffer);
-    return LoginResult(balance, was_successful);
+    if (!was_successful) {
+        return LoginResult(0, false);
+    }
+
+    return LoginResult(returnbalance(buffer), was_successful);
 }
 
 /*
@@ -82,10 +85,10 @@ bool create_account(Credential* cred) {
 }
 
 struct TransactionResult {
-    double remaining_balance;
+    long remaining_balance;
     bool was_successful;
     TransactionResult() : remaining_balance(0), was_successful(false) {};
-    TransactionResult(double remaining_balance, bool was_successful) : 
+    TransactionResult(long remaining_balance, bool was_successful) : 
         remaining_balance(remaining_balance), was_successful(was_successful) {};
 };
 
@@ -95,7 +98,7 @@ struct TransactionResult {
  * trailing digits.  Returns the amount currently in the account and whether or
  * not the transaction was successful.
  */
-TransactionResult deposit(Credential* cred, double amount) {
+TransactionResult deposit(Credential* cred, long amount) {
     int classifier;
     bool was_successful;
     bzero(buffer,256);
@@ -111,8 +114,8 @@ TransactionResult deposit(Credential* cred, double amount) {
         error("ERROR with connection to Server");
     }
     was_successful = determinesuccess(buffer);
-    double balance = returnbalance(buffer);
-    return TransactionResult(was_successful, balance);
+    long balance = returnbalance(buffer);
+    return TransactionResult(balance, was_successful);
 }
 
 /*
@@ -121,7 +124,7 @@ TransactionResult deposit(Credential* cred, double amount) {
  * digits.  Returns the amount left in the account and whether or not the
  * transaction was succesful. 
  */
-TransactionResult withdrawal(Credential* cred, double amount) {
+TransactionResult withdrawal(Credential* cred, long amount) {
     int classifier;
     bool was_successful;
     bzero(buffer,256);
@@ -137,8 +140,8 @@ TransactionResult withdrawal(Credential* cred, double amount) {
         error("ERROR with connection to Server");
     }
     was_successful = determinesuccess(buffer);
-    double balance = returnbalance(buffer);
-    return TransactionResult(was_successful, balance);
+    long balance = returnbalance(buffer);
+    return TransactionResult(balance, was_successful);
 }
 
 void handle_login(LandingPage* lp, Credential* cred) {
@@ -146,35 +149,44 @@ void handle_login(LandingPage* lp, Credential* cred) {
     TransactionResult res;
 
     if (login_r.was_successful) {
-        lp->popup("Welcome %s!\nYour balance is %.2lf\n",
+        lp->popup("Welcome %s!\nYour balance is %02ld.%02ld\n",
                 cred->username.c_str(),
-                login_r.balance);
+                login_r.balance / 100,
+                login_r.balance % 100);
         
         while (true) {
             HomePage* hp = new HomePage();
             HomeResult* hr = hp->wait_for_result();
             if (hr->type == DEPOSIT) {
                 res = deposit(cred, hr->amount);
-                if (res.was_successful)
-                    hp->popup("Depositing %.2lf was unsuccessful.\nCurrent Balance is %.2lf.\n",
-                            hr->amount,
-                            res.remaining_balance);
+                if (!res.was_successful)
+                    hp->popup("Depositing %02ld.%02ld was unsuccessful.\nCurrent Balance is %02ld.%02ld.\n",
+                            hr->amount / 100,
+                            hr->amount % 100,
+                            res.remaining_balance / 100,
+                            res.remaining_balance % 100);
                 else
-                    hp->popup("Successfully deposited %.2lf!\nCurrent balance is %.2lf.\n", 
-                            hr->amount,
-                            res.remaining_balance);
+                    hp->popup("Successfully deposited %02ld.%02ld!\nCurrent balance is %02ld.%02ld.\n", 
+                            hr->amount / 100,
+                            hr->amount % 100,
+                            res.remaining_balance / 100,
+                            res.remaining_balance % 100);
 
             }
             else {
                 res = withdrawal(cred, hr->amount);
                 if (!res.was_successful)
-                    hp->popup("Withdrawaling %.2lf was unsuccessful.\nYou only have %.2lf in your account",
-                            hr->amount,
-                            res.remaining_balance);
+                    hp->popup("Withdrawaling %02ld.%02ld was unsuccessful.\nYou only have %02ld.%02ld in your account\n",
+                            hr->amount / 100,
+                            hr->amount % 100,
+                            res.remaining_balance / 100,
+                            res.remaining_balance % 100);
                 else
-                    hp->popup("Successfully withdrew %.2lf!\nYou have %.2lf remaining in your account",
-                            hr->amount,
-                            res.remaining_balance);
+                    hp->popup("Successfully withdrew %02ld.%02ld!\nYou have %02ld.%02ld remaining in your account\n",
+                            hr->amount / 100,
+                            hr->amount % 100,
+                            res.remaining_balance / 100,
+                            res.remaining_balance % 100);
             }
         }
     }
@@ -185,7 +197,7 @@ void handle_login(LandingPage* lp, Credential* cred) {
 void handle_create_account(LandingPage* lp, Credential* cred) {
     bool create_r = create_account(cred);
     if (create_r)
-        lp->popup("Welcome %s!\nPlease continue and login.",
+        lp->popup("Welcome %s!\nPlease continue and login.\n",
                 cred->username.c_str());
     else
         lp->popup("Sorry, '%s' is already taken.\nTry another username.\n",
@@ -199,16 +211,19 @@ int main(int argc, char* argv[]) {
         exit(-1);
     }
     socketID = clientcreator(argv[2],argv[1]);
-    LandingPage* lp = new LandingPage();
-    LandingResult* lr = lp->wait_for_result();
 
-    while (lr->type == CREATE) {
-        handle_create_account(lp, lr->cred);
+    while (true) {
+        LandingPage* lp = new LandingPage();
+        LandingResult* lr = lp->wait_for_result();
+
+        while (lr->type == CREATE) {
+            handle_create_account(lp, lr->cred);
+            delete lp, lr;
+            lp = new LandingPage();
+            lr = lp->wait_for_result();
+        }
+
+        handle_login(lp, lr->cred);
         delete lp, lr;
-        lp = new LandingPage();
-        lr = lp->wait_for_result();
     }
-
-    handle_login(lp, lr->cred);
-    delete lp, lr;
 }

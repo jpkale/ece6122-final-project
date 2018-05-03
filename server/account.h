@@ -10,17 +10,17 @@ class account {
 public:
     //Constructors:
     account();
-    account(double accountNumberIn, double balanceIn, const char* userIDIn, const char* userPasswordIn);
+    account(long accountNumberIn, long balanceIn, const char* userIDIn, const char* userPasswordIn);
     //overloaded operators
 
     //member functions
-    void linkAccount(double accountNumber, accountHolder a); //associates account number(s) with an account holder
-    void deposit(double accountNumber, double depositAmount);
-    void withdrawal(double accountNumber, double withdrawAmount);
+    void linkAccount(long accountNumber, accountHolder a); //associates account number(s) with an account holder
+    void deposit(long accountNumber, long depositAmount);
+    void withdrawal(long accountNumber, long withdrawAmount);
 //Data members
 public:
-    double balance;
-    double accountNumber;
+    long balance;
+    long accountNumber;
     std::string userID;
 
 private:

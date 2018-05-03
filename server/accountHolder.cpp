@@ -46,12 +46,12 @@ const char* accountHolder::getAddress()
     return address.c_str();
 }
 
-double accountHolder::getCreditScore()
+long accountHolder::getCreditScore()
 {
     return score;
 }
 
-double accountHolder::getAccount()
+long accountHolder::getAccount()
 {
     return account;
 }
@@ -61,7 +61,7 @@ void accountHolder::setAddress(const char* addressIn)
     address = addressIn;
 }
 
-void accountHolder::setCreditScore(double ScoreIn)
+void accountHolder::setCreditScore(long ScoreIn)
 {
     score = ScoreIn;
 }
@@ -71,7 +71,7 @@ void accountHolder::setSSN(const char *SSNIn)
     SSN = SSNIn;
 }
 
-void accountHolder::addAccount(double accountNumber)
+void accountHolder::addAccount(long accountNumber)
 {
     account = accountNumber;
 }

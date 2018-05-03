@@ -11,9 +11,9 @@ namespace ui {
 
     class HomeResult {
         public:
-            double amount;
+            long amount;
             HomeRequestType type;
-            HomeResult(double amount, HomeRequestType type);
+            HomeResult(long amount, HomeRequestType type);
             ~HomeResult();
     };
 

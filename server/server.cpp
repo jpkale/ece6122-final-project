@@ -18,8 +18,8 @@ int main(int argc, char *argv[]) {
 
     int socketID, n;
     bool was_successful = false;
-    double balance;
-    double amount;
+    long balance;
+    long amount;
     std::string passCheck;
     char buffer[256];
     int b = 1;
@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
         {
 
             case 1: {
-                printf("Create Account");
+                printf("Create Account\n");
                 was_successful = false;
                 //Attempt to create account and set the value of was_successful.
                 username = serverreturnusername(buffer);
@@ -52,65 +52,41 @@ int main(int argc, char *argv[]) {
                 break;
             }
             case 2: {
-                printf("Deposit");
-                //Attempt to Perform Deposit of amount here and set boolean was_successful, set balance to accounts balance
-                username = serverreturnusername(buffer);
-                password = serverreturnpassword(buffer);
-                passCheck = log::getPassword(username, password);
+                printf("Deposit\n");
                 amount = serverreturnamount(buffer);
-                double previousbalance = log::getBalance(username, password);
-                was_successful = false;
-                if (passCheck == password) {
-                    was_successful = true;
-                }
-                if (was_successful) {
-                    double newamount = previousbalance + amount;
-                    log::writeFile(username, password, newamount, amount, DEPOSIT);
-                    balance = log::getBalance(username, password);
-                    strs << balance;
-                    std::string sendstring = "1," + strs.str() + ",";
-                    strcpy(buffer, sendstring.c_str());
-                    n = write(socketID, buffer, strlen(buffer));//Will Send True if successful followed by balance
-                } else {
-                    strs << balance;
-                    std::string sendstring = "0," + strs.str() + ",";
-                    strcpy(buffer, sendstring.c_str());
-                    n = write(socketID, "0", 1);//Will Send False if unsuccessful followed by balance
-                }
+                long previous_balance = log::getBalance(username, password);
+                long new_balance = previous_balance + amount;
+                log::writeFile(username, password, new_balance, amount, DEPOSIT);
+                strs << new_balance;
+                std::string sendstring = "1," + strs.str() + ",";
+                strcpy(buffer, sendstring.c_str());
+                n = write(socketID, buffer, strlen(buffer));
                 break;
             }
             case 3: {
-                printf("Withdrawl");
+                printf("Withdrawl\n");
 
                 //Attempt to Perform Withdrawl here and set boolean was_successful, set balance to accounts balance
-                username = serverreturnusername(buffer);
-                password = serverreturnpassword(buffer);
-                passCheck = log::getPassword(username, password);
                 amount = serverreturnamount(buffer);
-                was_successful = false;
-                double oldbalance = log::getBalance(username, password);
-                if (passCheck == password && (oldbalance >= amount)) {
-                    was_successful = true;
-                }
+                long oldbalance = log::getBalance(username, password);
 
-                if (was_successful) {
-                    double newamount = log::getBalance(username, password) - amount;
+                if (oldbalance >= amount) {
+                    long newamount = log::getBalance(username, password) - amount;
                     log::writeFile(username, password, newamount, amount, WITHDRAW);
-                    balance = log::getBalance(username, password);
-                    strs << balance;
+                    strs << newamount;
                     std::string sendstring = "1," + strs.str() + ",";
                     strcpy(buffer, sendstring.c_str());
-                    n = write(socketID, buffer, strlen(buffer));///Will Send True if successful followed by balance
                 } else {
-                    strs << balance;
+                    strs << oldbalance;
                     std::string sendstring = "0," + strs.str() + ",";
                     strcpy(buffer, sendstring.c_str());
-                    n = write(socketID, buffer, strlen(buffer));///Will Send False if unsuccessful followed by balance
                 }
+                printf("Buffer: %s\n", buffer);
+                n = write(socketID, buffer, strlen(buffer));///Will Send False if unsuccessful followed by balance
                 break;
             }
             case 4: {
-                printf("Login to Account");
+                printf("Login to Account\n");
 
                 //Attempt to Perform Login here and set boolean was_successful, set balance to accounts balance
                 username = serverreturnusername(buffer);

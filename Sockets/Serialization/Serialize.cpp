@@ -9,14 +9,14 @@ std::string serializecredentialcreate(ui::Credential* cred)
     std::string output = "1,"+cred->username +"," + cred->password + ",";
     return output;
 }
-std::string serializedeposit(ui::Credential* cred,double amount)
+std::string serializedeposit(ui::Credential* cred,long amount)
 {
     std::ostringstream strs;
     strs << amount;
     std::string output = "2,"+cred->username +"," + cred->password +"," + strs.str() + ",";
     return output;
 }
-std::string serializewithdrawl(ui::Credential* cred,double amount)
+std::string serializewithdrawl(ui::Credential* cred,long amount)
 {
     std::ostringstream strs;
     strs << amount;
@@ -29,44 +29,35 @@ int determineprocess(char* input)
     output = (int)input[0] - 48;
     return output;
 }
+
 std::string serializecredentiallogin(ui::Credential* cred)
 {
     std::string output = "4,"+cred->username +"," + cred->password + ",";
     return output;
 }
+
 bool determinesuccess(char* input)
 {
-    int success = (int)input[0] - 48;
-    if(success == 1)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return input[0] == '1';
 }
-double returnbalance(char* input)
+
+long returnbalance(char* input)
 {
-    double balance;
+    long balance;
     std::string placeholder;
     for(int i = 2;i<256;i++)
     {
-        if(input[i] == 44)
-        {
-            break;
-        }
-        else
-        {
-            placeholder.push_back(input[i]);
-        }
+        if (input[i] < '0' || input[i] > '9' )
+            continue;
+        placeholder.push_back(input[i]);
     }
-    balance = std::stod(placeholder);
+
+    balance = std::stol(placeholder);
     return balance;
 }
-double serverreturnamount(char* input)
+long serverreturnamount(char* input)
 {
-    double balance;
+    long balance;
     int j = 0;
     std::string placeholder;
     for(int i = 2;i<256;i++)
@@ -91,7 +82,7 @@ double serverreturnamount(char* input)
 }
 std::string serverreturnusername(char* input)
 {
-    double balance;
+    long balance;
     int j = 0;
     std::string placeholder;
     for(int i = 2;i<256;i++)
@@ -113,7 +104,7 @@ std::string serverreturnusername(char* input)
 }
 std::string serverreturnpassword(char* input)
 {
-    double balance;
+    long balance;
     int j = 0;
     std::string placeholder;
     for(int i = 2;i<256;i++)

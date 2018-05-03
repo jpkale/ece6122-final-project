@@ -12,7 +12,9 @@ using namespace ui;
 #define SUB_M_HEIGHT    3
 #define TEXT_LENGTH     20
 
-HomeResult::HomeResult(double amount, HomeRequestType type) {
+#define EMPTY_FIELD     "                     0.00"
+
+HomeResult::HomeResult(long amount, HomeRequestType type) {
     this->amount = amount;
     this->type = type;
 }
@@ -110,11 +112,40 @@ HomeResult* HomePage::wait_for_result() {
             case KEY_F(2):
                 this->handle_exit();
                 break;
+            case KEY_F(3):
+                form_driver(this->amount_form, REQ_CLR_FIELD);
+                break;
             default:
-                if (count < TEXT_LENGTH && (('0' <= c && c <= '9') || c == 46)) {
-                    form_driver(this->amount_form, c);
+                if (count < TEXT_LENGTH - 1  && (('0' <= c && c <= '9'))) {
+                    form_driver(this->amount_form, REQ_CLR_FIELD);
                     buf[count] = c;
                     count ++;
+
+                    if (count >= 3) {
+                        for (int i = 0; i < (TEXT_LENGTH - 1) - count; i ++) {
+                            form_driver(this->amount_form, ' ');
+                        }
+                        for (int i = (TEXT_LENGTH - 1) - count; i < (TEXT_LENGTH) - 3; i ++) {
+                            form_driver(this->amount_form, buf[i - (TEXT_LENGTH - 1) + count]);
+                        }
+                        form_driver(this->amount_form, '.');
+                        form_driver(this->amount_form, buf[count - 2]);
+                        form_driver(this->amount_form, buf[count - 1]); 
+                    } else if (count == 2) {
+                        for (int i = 0; i < TEXT_LENGTH - 3; i++) {
+                            form_driver(this->amount_form, ' ');
+                        } 
+                        form_driver(this->amount_form, '.');
+                        form_driver(this->amount_form, buf[count - 2]);
+                        form_driver(this->amount_form, buf[count - 1]); 
+                    } else if (count == 1) {
+                        for (int i = 0; i < TEXT_LENGTH - 3; i++) {
+                            form_driver(this->amount_form, ' ');
+                        } 
+                        form_driver(this->amount_form, '.');
+                        form_driver(this->amount_form, '0');
+                        form_driver(this->amount_form, buf[0]); 
+                    }
                 }
                 break;
         }
